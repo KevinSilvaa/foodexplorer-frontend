@@ -1,4 +1,4 @@
-import { FiSearch } from "react-icons/fi";
+// Styling Imports
 import { Container } from "./styles";
 
 export function Input({ icon: Icon, ...rest }) {

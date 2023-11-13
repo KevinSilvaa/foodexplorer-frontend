@@ -28,8 +28,10 @@ export default {
 
     // *Gradients Colors 
     GRADIENTS: {
-      GRADIENTS_100: "linear-gradient(90deg, rgba(0, 10, 15, 0.27) 0%, #000A0F 100%)",
-      GRADIENTS_200: "linear-gradient(180deg, #091E26 0%, #00131C 100%))"
+      BLUE_100: "rgba(0, 10, 15, 0.27)",
+      BLUE_100_2: "#000A0F",
+      BLUE_200: "#091E26",
+      BLUE_200_2: "#00131C",
     },
 
     // *Tints Colors
@@ -48,8 +50,8 @@ export default {
       MINT_100: "#04D361",
 
       // *Cake
-      CAKE_100: "#82F3FF",
-      CAKE_200: "#065E7C",
+      CAKE_100: "#065E7C",
+      CAKE_200: "#82F3FF",
     },
   }
 }

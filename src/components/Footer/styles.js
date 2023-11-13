@@ -15,9 +15,10 @@ export const Container = styled.footer`
     align-items: center;
     gap: 0.5rem;
     color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_700};
+    fill: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_700};
     font-weight: 700;
 
-    img {
+    svg {
       width: 20px;
       height: 20px;
     }

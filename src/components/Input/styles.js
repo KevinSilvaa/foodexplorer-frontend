@@ -9,12 +9,13 @@ export const Container = styled.div`
     background: ${({ theme }) => theme.COLORS.DARK.DARK_900};
     color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_100};
     border-radius: 0.5rem;
+    width: 100%;
 
     > input {
-      width: 100%;
       display: flex;
       align-items: center;
       background: transparent;
+      width: 100%;
       border: none;
       color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_100};
 
