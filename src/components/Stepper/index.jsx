@@ -7,7 +7,7 @@ import { useState } from "react";
 // Icons Imports
 import { FiPlus, FiMinus } from "react-icons/fi";
 
-export function Stepper({ onClick }) {
+export function Stepper() {
 
   // Set the quantity that the user want
   const [quantity, setQuantity] = useState(0);

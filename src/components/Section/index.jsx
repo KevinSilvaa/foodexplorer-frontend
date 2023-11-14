@@ -1,3 +1,4 @@
+// Styling Imports
 import { Container } from "./styles";
 
 export function Section({ children, title }) {

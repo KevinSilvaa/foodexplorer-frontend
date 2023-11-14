@@ -10,12 +10,16 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.main`
-  height: 100vh;
-  margin: 2.5rem 1rem 1.5rem;
+  margin: 2.5rem 1rem 0;
   grid-area: content;
 
+  .cards {
+    display: flex;
+    gap: 1rem;
+  }
+
   @media screen and (min-width: 850px) {
-    margin: 8rem 7.5rem 3rem;
+    margin: 10rem 7.5rem 1.5rem;
   }
 `;
 
@@ -29,7 +33,7 @@ export const Banner = styled.div`
   justify-content: space-between;
   grid-template-areas:
   "img info";
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: repeat(2, 1fr);
   justify-content: space-between;
   background: linear-gradient(180deg, ${({ theme }) => theme.COLORS.GRADIENTS.BLUE_200} 0%, ${({ theme }) => theme.COLORS.GRADIENTS.BLUE_200_2} 100%);
   border-radius: 0.5rem;
@@ -64,8 +68,6 @@ export const Banner = styled.div`
 
   @media screen and (min-width: 850px) {
       height: 260px;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
     
       > img {
         bottom: 0;
