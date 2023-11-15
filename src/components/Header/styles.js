@@ -15,7 +15,7 @@ export const Container = styled.header`
   nav {
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 1500px;
     top: 130%;
     left: 0;
     z-index: 9999;

@@ -4,7 +4,7 @@ import { Container, Content, Banner } from "./styles";
 // Components imports
 import { Header } from "../../components/Header";
 import { Section } from "../../components/Section";
-import { Carousel } from "../../components/Carousel";
+import { Slider } from "../../components/Slider";
 import { Footer } from "../../components/Footer";
 
 // Strategic Imports
@@ -15,9 +15,8 @@ import { Footer } from "../../components/Footer";
 
 // Image Imports
 import background from "../../assets/bannerbg.svg";
-import { Card } from "../../components/Card";
 
-// *TODO FAZER O SLIDER PARA TODAS AS SEÇÕES
+// *TODO FAZER O MAP PARA CADA CARD
 
 export function Home() {
 
@@ -39,15 +38,15 @@ export function Home() {
 
 
         <Section title="Refeições">
-          
+          <Slider />
         </Section>
 
         <Section title="Pratos principais">
-
+          <Slider />
         </Section>
 
         <Section title="Bebidas">
-
+          <Slider />
         </Section>
 
       </Content>

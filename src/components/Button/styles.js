@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.button`
-  width: 100%;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5rem;
   font-family: 'Poppins';
-  padding: 0.5rem;
+  padding: 0.75rem 1.5rem;
   color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_100};
   background: ${({ theme }) => theme.COLORS.TINTS.TOMATO_100};
   border: none;
