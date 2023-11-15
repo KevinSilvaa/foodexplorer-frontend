@@ -42,37 +42,8 @@ export const Form = styled.form`
     display: none;
   }
 
-  .input-wrapper {
-    display: flex;
-    flex-direction: column;
-    color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_400};
-    gap: 0.5rem;
-    font-family: 'Roboto';
-
-    > div {
-      display: flex;
-      width: 100%;
-      text-align: left;
-  
-      > svg {
-          width: 20px;
-          height: 25px;
-      }
-
-      input {
-        background: transparent;
-        
-        &::placeholder {
-          text-align: left;
-          color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_500};
-          border: transparent;
-        }
-      }
-     
-      &:focus-within {
-        border: 1px solid ${({ theme }) => theme.COLORS.LIGHT.LIGHT_100};
-      }
-    }
+  .field {
+    background: ${({ theme }) => theme.COLORS.DARK.DARK_900};
   }
 
   > a {

@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { Home } from "../pages/Home"
 import { DishDetails } from "../pages/DishDetails";
+import { NewDish } from "../pages/NewDish";
 
 export function AppRoutes() {
 
@@ -9,6 +10,7 @@ export function AppRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dishdetails" element={<DishDetails />} />
+      <Route path="/newdish" element={<NewDish />} />
     </Routes>
   );
 }

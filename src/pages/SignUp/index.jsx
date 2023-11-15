@@ -25,35 +25,29 @@ export function SignUp() {
 
       <Form>
         <h1>Faça login</h1>
-        <div className="input-wrapper">
-          <label htmlFor="email">Nome</label>
-          <Input
-            id="name"
-            icon={FiUser}
-            placeholder="Digite seu nome"
-            type="text"
-          />
-        </div>
+        <Input
+          icon={FiUser}
+          title="Seu nome"
+          type="text"
+          placeholder="No mínimo 6 caracteres"
+          id="1"
+        />
 
-        <div className="input-wrapper">
-          <label htmlFor="email">Email</label>
-          <Input
-            id="email"
-            icon={FiUser}
-            placeholder="Exemplo: exemplo@gmail.com"
-            type="email"
-          />
-        </div>
+        <Input
+          icon={FiUser}
+          title="Email"
+          type="text"
+          placeholder="Exemplo: @exemplo@gmail.com"
+          id="2"
+        />
 
-        <div className="input-wrapper">
-          <label htmlFor="email">Senha</label>
-          <Input
-            id="password"
-            icon={FiLock}
-            placeholder="No mínimo 6 caracteres"
-            type="password"
-          />
-        </div>
+        <Input
+          icon={FiLock}
+          title="Senha"
+          type="password"
+          placeholder="No mínimo 6 caracteres"
+          id="3"
+        />
 
         <Button title="Criar conta" />
 

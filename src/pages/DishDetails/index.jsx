@@ -13,8 +13,6 @@ import { Footer } from "../../components/Footer";
 // Strategic Imports
 import { useNavigate } from "react-router-dom";
 
-// Icons Imports
-
 // Image Imports
 import img from "../../assets/Mask group.png";
 

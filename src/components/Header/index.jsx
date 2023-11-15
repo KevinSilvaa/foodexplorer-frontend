@@ -23,13 +23,13 @@ export function Header() {
   const navigate = useNavigate();
 
   // Check if the user is admin
-  const isAdmin = false;
+  const isAdmin = true;
 
   function handleNewDish() {
-    navigate("/newdish")
+    navigate("/newdish");
   }
 
-  function handleSignOut() {
+  function handleLogout() {
     alert("Teste");
   }
 
@@ -60,13 +60,13 @@ export function Header() {
 
           <div className="buttons">
             {isAdmin ?
-              <button onClick={handleNewDish}>
+              <button  onClick={handleNewDish}>
                 Novo prato
               </button>
               :
               ""
             }
-            <button onClick={handleSignOut}>
+            <button onClick={handleLogout}>
               Sair
             </button>
           </div>
@@ -97,6 +97,7 @@ export function Header() {
           {isAdmin ?
             <ButtonIcon
               title="Novo prato"
+              onClick={handleNewDish}
             />
 
             :
@@ -123,7 +124,7 @@ export function Header() {
           }
         </div>
 
-        <button className="desktop">
+        <button className="desktop" onClick={handleLogout}>
           <FiLogOut size={32} />
         </button>
       </Content>

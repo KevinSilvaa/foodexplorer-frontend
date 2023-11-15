@@ -1,12 +1,16 @@
 // Styling Imports
-import { Container } from "./styles";
+import { Container, Field } from "./styles";
 
-export function Input({ icon: Icon, ...rest }) {
+export function Input({ icon: Icon, title, id, ...rest }) {
 
   return (
     <Container>
-      {Icon ? <Icon size={24} /> : ""}
-      <input type="text" {...rest} />
+      <label htmlFor={id}>{title}</label>
+
+      <Field className="field">
+        {Icon && <Icon size={24} />}
+        <input id={id} {...rest} />
+      </Field>
     </Container>
   );
 }
