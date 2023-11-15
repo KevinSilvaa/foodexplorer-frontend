@@ -5,18 +5,26 @@ import { Container, Content, Form } from "./styles";
 import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
 import { Section } from "../../components/Section";
+import { InputFile } from "../../components/InputFile";
 import { Input } from "../../components/Input";
+import { Select } from "../../components/Select";
+import { IngredientTag } from "../../components/IngredientTag";
 
 // Strategic Imports
-
+import { useState } from "react";
 
 // Icons Imports
-import { FiUpload, FiUser } from "react-icons/fi";
-import { InputFile } from "../../components/InputFile";
+import { FiUpload } from "react-icons/fi";
 
 export function NewDish() {
 
   const isAdmin = true;
+  const [newIngredient, setNewIngredient] = useState("");
+
+  function handleTest() {
+    alert(`Adicionando ${newIngredient} a lista de ingredientes`);
+    setNewIngredient("");
+  }
 
   return (
     <Container>
@@ -35,12 +43,25 @@ export function NewDish() {
             />
 
             <Input
-              icon={FiUser}
-              title="Imagem do prato"
-              placeholder="Testando input"
-              text="Selecione a imagem"
-              id="1"
+              title="Nome"
+              placeholder="Ex: Salada Caesar"
+              id="2"
             />
+
+            <Select />
+
+            <div className="ingredients">
+              <IngredientTag
+                value="Croutons"
+              />
+
+              <IngredientTag
+                isNew
+                placeholder="Adicionar"
+                onChange={e => setNewIngredient(e.target.value)}
+                onClick={handleTest}
+              />
+            </div>
           </Form>
         </Section>
       </Content>

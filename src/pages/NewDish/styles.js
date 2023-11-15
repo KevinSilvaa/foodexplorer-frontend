@@ -22,5 +22,12 @@ export const Form = styled.form`
   gap: 1.5rem;
   margin-top: 2.5rem;
 
-  
+  .ingredients {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0.5rem;
+      gap: 1rem;
+      background: ${({ theme }) => theme.COLORS.DARK.DARK_800};
+      border-radius: 0.5rem;
+    }
 `;
