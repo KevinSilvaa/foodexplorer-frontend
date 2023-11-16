@@ -20,10 +20,12 @@ export const Field = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 2rem;
   background: ${({ theme }) => theme.COLORS.DARK.DARK_800};
   border-radius: 0.5rem;
+  cursor: pointer;
 
   p {
     font-size: 0.875rem;

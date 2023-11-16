@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_400};
+  width: 100%;
+  position: relative;
   
   &:has(.option input:checked) #category-select label {
     color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_400};
@@ -17,6 +19,9 @@ export const Container = styled.div`
     border-radius: 0.25rem;
     background: ${({ theme }) => theme.COLORS.DARK.DARK_900};
     display: none;
+    position: absolute;
+    bottom: -205%;
+    width: 100%;
 
     .option {
       display: flex;

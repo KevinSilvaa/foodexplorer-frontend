@@ -10,23 +10,13 @@ import { Input } from "../../components/Input";
 import { Select } from "../../components/Select";
 import { IngredientTag } from "../../components/IngredientTag";
 import { Button } from "../../components/Button";
-import { Footer } from "../../components/Footer";
 import { Textarea } from "../../components/Textarea";
-
-// Strategic Imports
-import { useState } from "react";
+import { Footer } from "../../components/Footer";
 
 // Icons Imports
 import { FiUpload } from "react-icons/fi";
 
-export function NewDish() {
-
-  const [newIngredient, setNewIngredient] = useState("");
-
-  function handleTest() {
-    alert(`Adicionando ${newIngredient} a lista de ingredientes`);
-    setNewIngredient("");
-  }
+export function EditDish() {
 
   return (
     <Container>
@@ -35,26 +25,26 @@ export function NewDish() {
       <Content id="content">
         <ButtonText />
 
-        <Section title="Novo prato">
+        <Section title="Editar prato">
           <Form>
             <InputFile
               icon={FiUpload}
               title="Imagem do prato"
               text="Selecione imagem"
-              id="image"
+              id="1"
             />
 
             <Input
               title="Nome"
               placeholder="Ex: Salada Caesar"
-              id="name"
+              id="2"
             />
 
             <Select />
+
             <div>
-              <label htmlFor="ingredients">Ingredientes</label>
-              
-              <div className="ingredients" id="ingredients">
+              <label htmlFor="ingredients">Ingredients</label>
+              <div className="ingredients">
                 <IngredientTag
                   value="Croutons"
                 />
@@ -62,17 +52,13 @@ export function NewDish() {
                 <IngredientTag
                   isNew
                   placeholder="Adicionar"
-                  onChange={e => setNewIngredient(e.target.value)}
-                  onClick={handleTest}
                 />
               </div>
-
             </div>
 
             <Input
               title="Preço"
               placeholder="R$ 00,00"
-              id="price"
             />
 
             <Textarea
@@ -81,10 +67,14 @@ export function NewDish() {
               title="Descrição"
             />
 
-            <Button
-              title="Salvar Alterações"
-            />
-
+            <div className="buttons">
+              <Button
+                title="Excluir prato"
+              />
+              <Button
+                title="Salvar Alterações"
+              />
+            </div>
           </Form>
         </Section>
       </Content>

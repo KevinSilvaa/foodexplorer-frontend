@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  
 `;
 
 export const Content = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2.25rem;
@@ -18,7 +19,7 @@ export const Content = styled.div`
     font-size: 2rem;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 850px) {
     padding: 2.5rem 7.75rem 7.25rem;
   }
 `;
@@ -39,7 +40,7 @@ export const Form = styled.form`
     flex-direction: column;
     gap: 1rem;
     letter-spacing: 0.0225rem;
-    
+
     .ingredients {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -47,16 +48,38 @@ export const Form = styled.form`
       gap: 1rem;
       background: ${({ theme }) => theme.COLORS.DARK.DARK_800};
       border-radius: 0.5rem;
-      grid-area: ingredients;
     }
   }
 
-  button:nth-child(6) {
-    background: ${({ theme }) => theme.COLORS.TINTS.TOMATO_400};
-    transition: all 0.3s ease-in-out;
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    height: 3rem;
+    
+    button {
+      width: 50%;
+      padding: 0;
+    }
 
-    &:hover {
-      background: ${({ theme }) => theme.COLORS.TINTS.TOMATO_200};
+    button:first-child {
+      background: ${({ theme }) => theme.COLORS.DARK.DARK_800};
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background: ${({ theme }) => theme.COLORS.DARK.DARK_1000};
+      }
+    }
+    
+    button:last-child {
+      background: ${({ theme }) => theme.COLORS.TINTS.TOMATO_400};
+      transition: all 0.3s ease-in-out;
+      
+
+      &:hover {
+        background: ${({ theme }) => theme.COLORS.TINTS.TOMATO_200};
+      }
     }
   }
 
@@ -66,7 +89,6 @@ export const Form = styled.form`
     display: grid;
     align-items: center;
     grid-template-columns: 1fr repeat(2, 1.75fr);
-    justify-items: end;
     grid-template-areas: 
     "image name category"
     "ingredients ingredients price"
@@ -84,9 +106,27 @@ export const Form = styled.form`
       grid-area: textarea;
     }
   
-    button:last-child {
+    .buttons {
+      flex-direction: row;
       grid-area: button;
-      width: 75%;
+
+      button:first-child {
+        background: ${({ theme }) => theme.COLORS.DARK.DARK_800};
+        transition: all 0.4s ease-in-out;
+
+        &:hover {
+          background: ${({ theme }) => theme.COLORS.DARK.DARK_1000};
+        }
+      }
+
+      button:last-child {
+        background: ${({ theme }) => theme.COLORS.TINTS.TOMATO_400};
+        transition: all 0.4s ease-in-out;
+
+        &:hover {
+          background: ${({ theme }) => theme.COLORS.TINTS.TOMATO_200};
+        }
+      }
     }
   
     div:nth-child(4) {
@@ -95,13 +135,6 @@ export const Form = styled.form`
     
     div:nth-child(5) {
       grid-area: price;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    button:last-child {
-      grid-area: button;
-      width: 60%;
     }
   }
 `;

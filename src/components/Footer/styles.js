@@ -30,7 +30,7 @@ export const Container = styled.footer`
     text-align: right;
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 850px) {
     padding: 1.5rem 8rem;
 
     > div {

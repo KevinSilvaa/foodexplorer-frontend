@@ -27,7 +27,7 @@ export const Field = styled.div`
   border-radius: 0.5rem;
 
   &:focus-within {
-    border: 1px solid ${({ theme }) => theme.COLORS.LIGHT.LIGHT_100};
+    border: 1px solid ${({ theme }) => theme.COLORS.LIGHT.LIGHT_500};
   }
   
   > svg {

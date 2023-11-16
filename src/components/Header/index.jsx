@@ -2,11 +2,11 @@
 import { Container, Logo, Content, Orders, Menu } from "./styles";
 
 // Components Imports
-import { Input } from "../Input";
+import { InputSearch } from "../InputSearch";
 import { ButtonIcon } from "../ButtonIcon";
 
 // Strategic Imports
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // Icons Imports
@@ -23,7 +23,7 @@ export function Header() {
   const navigate = useNavigate();
 
   // Check if the user is admin
-  const isAdmin = true;
+  const isAdmin = false;
 
   function handleNewDish() {
     navigate("/newdish");
@@ -53,9 +53,9 @@ export function Header() {
 
       <nav className="hamb hide">
         <div>
-          <Input
-            icon={FiSearch}
+          <InputSearch 
             placeholder="Busque por pratos ou ingredientes"
+            icon
           />
 
           <div className="buttons">
@@ -88,10 +88,10 @@ export function Header() {
           </Link>
         </Logo>
 
-        <Input
-          icon={FiSearch}
-          placeholder="Busque por pratos ou ingredients"
-        />
+        <InputSearch 
+            placeholder="Busque por pratos ou ingredientes"
+            icon
+          />
 
         <div className="desktop">
           {isAdmin ?
