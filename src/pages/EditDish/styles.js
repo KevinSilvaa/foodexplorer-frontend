@@ -11,10 +11,6 @@ export const Content = styled.div`
   gap: 2.25rem;
   padding: 1rem 2rem 3.5rem;
 
-  section {
-    margin: 0;
-  }
-
   h1 {
     font-size: 2rem;
   }
@@ -34,14 +30,26 @@ export const Form = styled.form`
     font-size: 1rem;
     color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_400};
   }
+
+  > div:nth-child(1) {
+    display: flex;
+    gap: 2rem;
+    
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      align-self: center;
+  }
+  }
   
   > div {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.25rem;
     letter-spacing: 0.0225rem;
 
-    .ingredients {
+    #ingredients {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       padding: 0.5rem;
@@ -96,9 +104,23 @@ export const Form = styled.form`
     "_ _ button";
     
     div {
-      
-      .ingredients {
-        grid-template-columns: repeat(4, 1fr);
+      #ingredients {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        div {
+          width: clamp(100px, 75%, 153px);
+        }
+      }
+    }
+
+    div:nth-child(1) {
+      flex-direction: row;
+
+      label {
+        width: 100%;
+        gap: 1rem;
       }
     }
   
@@ -128,9 +150,18 @@ export const Form = styled.form`
         }
       }
     }
-  
+
+    div:nth-child(2) {
+      gap: 0.75rem;
+    }
+    
+    div:nth-child(3) {
+      grid-area: category;
+    }
+
     div:nth-child(4) {
       grid-area: ingredients;
+      width: 100%;
     }
     
     div:nth-child(5) {

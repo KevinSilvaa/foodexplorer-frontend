@@ -18,12 +18,8 @@ export const Container = styled.div`
       }
     }
 
-    .splide__pagination {
+    .splide__pagination, .splide__arrow {
       display: none;
-    }
-    
-    .splide__arrow {
-      width: 32px;
     }
   }
 

@@ -40,7 +40,7 @@ export const Form = styled.form`
     gap: 1rem;
     letter-spacing: 0.0225rem;
     
-    .ingredients {
+    #ingredients {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       padding: 0.5rem;
@@ -72,14 +72,19 @@ export const Form = styled.form`
     "ingredients ingredients price"
     "textarea textarea textarea"
     "_ _ button";
-    
+  
     div {
-      
-      .ingredients {
-        grid-template-columns: repeat(4, 1fr);
+      #ingredients {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        div {
+          width: clamp(100px, 75%, 153px);
+        }
       }
     }
-  
+
     div:has(textarea) {
       grid-area: textarea;
     }
@@ -91,6 +96,7 @@ export const Form = styled.form`
   
     div:nth-child(4) {
       grid-area: ingredients;
+      width: 100%;
     }
     
     div:nth-child(5) {

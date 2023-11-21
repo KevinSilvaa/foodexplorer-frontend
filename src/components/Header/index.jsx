@@ -6,7 +6,8 @@ import { InputSearch } from "../InputSearch";
 import { ButtonIcon } from "../ButtonIcon";
 
 // Strategic Imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 
 // Icons Imports
@@ -15,22 +16,27 @@ import { FiLogOut, FiMenu, FiSearch } from "react-icons/fi";
 
 // Image Imports
 import logo from "../../assets/Logo.svg";
+import { api } from "../../services/api";
 
-export function Header() {
+export function Header({ search, setSearch }) {
   const [orders, setOrders] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dishes, setDishes] = useState([]);
+
+  const { signOut, user } = useAuth();
 
   const navigate = useNavigate();
 
   // Check if the user is admin
-  const isAdmin = false;
+  const isAdmin = user.role === "admin";
 
   function handleNewDish() {
     navigate("/newdish");
   }
 
   function handleLogout() {
-    alert("Teste");
+    navigate("/");
+    signOut();
   }
 
   // Function to change hamburger menu to open or close
@@ -41,6 +47,16 @@ export function Header() {
     });;
     document.getElementById("content").classList.toggle("hide");
   }
+
+  useEffect(() => {
+    async function fetchDishes() {
+      const response = await api.get(`/dishes?name=${search}&ingredients=${search}`)
+      setDishes(response.data)
+      console.log(search)
+    }
+
+    fetchDishes();
+  }, [search])
 
   return (
     <Container>
@@ -56,6 +72,7 @@ export function Header() {
           <InputSearch 
             placeholder="Busque por pratos ou ingredientes"
             icon
+            onChange={e => setSearch(e.target.value)}
           />
 
           <div className="buttons">
@@ -91,6 +108,7 @@ export function Header() {
         <InputSearch 
             placeholder="Busque por pratos ou ingredientes"
             icon
+            onChange={e => setSearch(e.target.value)}
           />
 
         <div className="desktop">

@@ -40,5 +40,7 @@ export const Container = styled.div`
 
   .button-add {
     color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_500};
+    width: 20px;
+    height: 20px;
   }
 `;

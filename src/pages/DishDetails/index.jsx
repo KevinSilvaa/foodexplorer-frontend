@@ -4,26 +4,42 @@ import { Container, Content } from "./styles";
 // Components Imports
 import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
-import { Ingredient } from "../../components/Ingredient";
 import { Stepper } from "../../components/Stepper";
 import { ButtonIcon } from "../../components/ButtonIcon";
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
+import { Ingredient } from "../../components/Ingredient";
 
 // Strategic Imports
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useAuth } from "../../hooks/auth";
+import { api } from "../../services/api";
 
 // Image Imports
 import img from "../../assets/Mask group.png";
 
 export function DishDetails() {
+  const [data, setData] = useState(null);
 
+  const { user } = useAuth();
+
+  const params = useParams();
   const navigate = useNavigate();
-  const isAdmin = false;
-  const price = 10;
+
+  const isAdmin = user.role === "admin"
+
+  useEffect(() => {
+    async function fetchDish() {
+      const response = await api.get(`/dishes/${params.id}`);
+      setData(response.data);
+    }
+
+    fetchDish();
+  }, []);
 
   function handleDishEdit() {
-    navigate(`/dishedit/${price}`);
+    navigate(`/editdish/${params.id}`);
   }
 
   function handleAdd() {
@@ -34,44 +50,48 @@ export function DishDetails() {
     <Container>
       <Header />
 
-      <Content>
-        <ButtonText />
+      {data &&
+        <Content>
+          <ButtonText />
 
-        <div>
-          <img src={img} />
-          <div className="content">
-            <h1>Salada Ravanello</h1>
-            <p>Rabanetes, folhas verdes e molho agridoce salpicados com gergelim. O pão naan dá um toque especial.</p>
-            <div className="ingredients">
-              <Ingredient title="Alface" />
-              <Ingredient title="Cebola" />
-              <Ingredient title="Croutons" />
-              <Ingredient title="Pepino" />
-              <Ingredient title="Rabanete" />
-              <Ingredient title="Tomate" />
+          <div>
+            <img src={img} />
+            <div className="content">
+              <h1>{data.name}</h1>
+              <p>{data.description}</p>
+              <div className="ingredients">
+                {
+                  data.ingredients.map(ingredient => (
+                    <Ingredient
+                      key={ingredient.id}
+                      title={ingredient.name}
+                    />
+                  ))
+                }
+              </div>
+
+              {isAdmin ?
+                <div className="buttons">
+                  <Button
+                    title="Editar prato"
+                    onClick={handleDishEdit}
+                  />
+                </div>
+                :
+                <div className="buttons">
+                  <Stepper />
+                  <ButtonIcon
+                    title={`Pedir - R$${String(price)},00`}
+                    icon
+                    onClick={handleAdd}
+                  />
+                </div>
+              }
             </div>
-
-            {isAdmin ?
-              <div className="buttons">
-                <Button
-                  title="Editar prato"
-                  onClick={handleDishEdit}
-                />
-              </div>
-              :
-              <div className="buttons">
-                <Stepper />
-                <ButtonIcon
-                  title={`Pedir - R$${String(price)},00`}
-                  icon
-                  onClick={handleAdd}
-                />
-              </div>
-            }
           </div>
-        </div>
-      </Content>
-      
+        </Content>
+      }
+
       <Footer />
     </Container>
   );

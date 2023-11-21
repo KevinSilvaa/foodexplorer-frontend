@@ -6,7 +6,8 @@ import { Stepper } from "../Stepper";
 import { Button } from "../Button";
 
 // Strategic Imports
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
 
 // Icons Imports
 import { PiPencil, PiHeart } from "react-icons/pi";
@@ -14,16 +15,16 @@ import { PiPencil, PiHeart } from "react-icons/pi";
 // Image Imports
 import img from "../../assets/Mask group-1.png";
 
-export function Card({ title, price, description }) {
+export function Card({ title, price, description, onClick, id, handleFavorite }) {
 
-  const isAdmin = false;
+  const { user } = useAuth();
 
-  function handleFavorite() {
-    alert("Favoritando");
-  }
+  const navigate = useNavigate();
+
+  const isAdmin = user.role === "admin";
 
   function handleEdit() {
-    alert("Editando");
+    navigate(`/editdish/${id}`);
   }
 
   function handleAdd() {
@@ -36,11 +37,11 @@ export function Card({ title, price, description }) {
         {isAdmin ? <PiPencil size={24} /> : <PiHeart size={24} />}
       </button>
 
-      <Link to="/dishdetails">
+      <div onClick={onClick}>
         <img src={img} />
         <h2>{title}</h2>
         <p className="desc">{description}</p>
-      </Link>
+      </div>
 
       <span>R$ {price}</span>
 

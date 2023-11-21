@@ -9,7 +9,6 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 
 // Carousel Styling Imports
 import '@splidejs/splide/css/skyblue';
-import { dish } from "./teste";
 
 export function Slider({ children }) {
 
@@ -37,18 +36,7 @@ export function Slider({ children }) {
         <Splide
           options={sliderOptions} className="slider-div"
         >
-          {
-            dish.map(info => (
-              <SplideSlide key={info.id}>
-                <Card
-                  key={String(info.id)}
-                  title={info.title}
-                  price={info.price}
-                  description={info.description}
-                />
-              </SplideSlide>
-            ))
-          }
+          {children}
         </Splide>
       </div>
     </Container>

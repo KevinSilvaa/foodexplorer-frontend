@@ -5,9 +5,9 @@ import { Container, Field } from "./styles";
 import { useEffect, useState } from "react";
 
 // Icons Imports
-import { LuBeef, LuCheck, LuChevronDown, LuChevronUp, LuCupSoda, LuSalad } from "react-icons/lu"
+import { LuBeef, LuCakeSlice, LuCheck, LuChevronDown, LuChevronUp, LuCupSoda, LuSalad } from "react-icons/lu"
 
-export function Select() {
+export function Select({ changeValue, value }) {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,7 +36,7 @@ export function Select() {
         <input type="checkbox" id="options-view"></input>
         
         <div id="select-button">
-          <div id="selected-value">Selecione uma opção</div>
+          <div id="selected-value">{value ? value : "Selecione uma opção"}</div>
 
           <div id="chevrons">
             <LuChevronDown />
@@ -45,12 +45,12 @@ export function Select() {
         </div>
       </Field>
 
-      <ul id="options">
+      <ul id="options" onChange={changeValue}>
         <li className="option" onClick={handleClick}>
           <input
             type="radio"
             name="category"
-            value="meals"
+            value="Refeições"
             data-label="Refeições"
           />
 
@@ -63,7 +63,7 @@ export function Select() {
           <input
             type="radio"
             name="category"
-            value="principal-meals"
+            value="Pratos principais"
             data-label="Pratos principais"
           />
 
@@ -76,12 +76,25 @@ export function Select() {
           <input
             type="radio"
             name="category"
-            value="drinks"
+            value="Bebidas"
             data-label="Bebidas"
           />
 
           <LuCupSoda />
           <span className="label">Bebidas</span>
+          <LuCheck />
+        </li>
+        
+        <li className="option" onClick={handleClick}>
+          <input
+            type="radio"
+            name="category"
+            value="Sobremesas"
+            data-label="Sobremesas"
+          />
+
+          <LuCakeSlice />
+          <span className="label">Sobremesas</span>
           <LuCheck />
         </li>
       </ul>

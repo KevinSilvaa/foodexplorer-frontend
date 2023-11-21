@@ -1,4 +1,3 @@
-
 // Style Imports
 import { Container, Logo, Form } from "./styles"
 
@@ -7,7 +6,9 @@ import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 
 // Strategic imports 
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
 
 // Icons Imports
 import { FiLock, FiUser } from "react-icons/fi";
@@ -16,6 +17,18 @@ import { FiLock, FiUser } from "react-icons/fi";
 import logo from "../../assets/Logo.svg";
 
 export function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { signIn } = useAuth();
+
+  function handleSignIn() {
+    if (!email || !password) {
+      return alert("Preencha todos os campos");
+    }
+    
+    signIn({ email, password })
+  }
 
   return (
     <Container>
@@ -27,21 +40,24 @@ export function SignIn() {
       <Form>
         <h1>Faça login</h1>
         <Input
-          icon={FiUser}
-          title="Email"
-          type="text"
           placeholder="Exemplo: exemplo@gmail.com"
-          id="1"
+          type="text"
+          title="Email"
+          icon={FiUser}
+          onChange={e => setEmail(e.target.value)}
         />
 
         <Input
-          icon={FiLock}
-          title="Senha"
-          type="password"
           placeholder="No mínimo 6 caracteres"
-          id="2"
+          type="password"
+          title="Senha"
+          icon={FiLock}
+          onChange={e => setPassword(e.target.value)}
         />
-        <Button title="Entrar" />
+        <Button 
+          title="Entrar"
+          onClick={handleSignIn}  
+        />
 
         <Link to="/register">Criar uma conta</Link>
       </Form>

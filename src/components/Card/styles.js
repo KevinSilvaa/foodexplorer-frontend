@@ -27,12 +27,13 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_100};
   }
 
-  > a {
+  > div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
+    cursor: pointer;
 
     img {
       width: 88px;
@@ -75,7 +76,7 @@ export const Container = styled.div`
       text-align: center;
     }
 
-    > a {
+    > div {
       gap: 1rem;
       
       img {
@@ -87,6 +88,7 @@ export const Container = styled.div`
         font-size: 1.5rem;
         font-weight: 700;
         line-height: 2rem;
+        color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_300};
       }
     }
 

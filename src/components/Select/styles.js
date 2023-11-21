@@ -20,7 +20,7 @@ export const Container = styled.div`
     background: ${({ theme }) => theme.COLORS.DARK.DARK_900};
     display: none;
     position: absolute;
-    bottom: -205%;
+    bottom: -275%;
     width: 100%;
 
     .option {
@@ -74,7 +74,10 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.COLORS.TINTS.TOMATO_400};
       }
       &:nth-child(3) {
-        color: ${({ theme }) => theme.COLORS.TINTS.CAKE_100};
+        color: ${({ theme }) => theme.COLORS.TINTS.CAKE_200};
+      }
+      &:nth-child(4) {
+        color: ${({ theme }) => theme.COLORS.TINTS.CARROT_100};
       }
     }
   }

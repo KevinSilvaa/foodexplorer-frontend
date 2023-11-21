@@ -18,6 +18,14 @@ export const Content = styled.main`
     gap: 1rem;
   }
 
+  section div:has(.nothing-added) {
+    justify-content: left;
+    
+    h1 {
+      color: ${({ theme }) => theme.COLORS.TINTS.CAKE_100};
+    }
+  }
+
   @media screen and (min-width: 850px) {
     margin: 10rem 7.5rem 1.5rem;
   }

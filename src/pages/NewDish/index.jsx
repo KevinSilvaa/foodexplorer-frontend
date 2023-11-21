@@ -14,18 +14,80 @@ import { Footer } from "../../components/Footer";
 import { Textarea } from "../../components/Textarea";
 
 // Strategic Imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 // Icons Imports
 import { FiUpload } from "react-icons/fi";
 
 export function NewDish() {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
 
+  const [image, setImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+
+  const [category, setCategory] = useState("");
+
+  const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
 
-  function handleTest() {
-    alert(`Adicionando ${newIngredient} a lista de ingredientes`);
+  const navigate = useNavigate();
+
+  function handleAddImage(event) {
+    const file = event.target.files[0];
+    setImageFile(file);
+
+    const imagePreview = URL.createObjectURL(file);
+    setImage(imagePreview);
+  }
+
+  function handleAddIngredient() {
+    if (newIngredient === "") {
+      return alert("Você não pode adicionar um ingrediente vazio.");
+    }
+    setIngredients(prevState => [...prevState, newIngredient]);
     setNewIngredient("");
+  }
+
+  function handleRemoveIngredient(deleted) {
+    setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
+  }
+
+  async function handleNewDish() {
+    if (!name) {
+      return alert("Digite o nome do prato");
+    }
+
+    if (!category || category === "Selecione uma opção") {
+      return alert("Selecione a categoria do prato");
+    }
+
+    if (!price) {
+      return alert("Digite o preço do prato");
+    }
+
+    if (newIngredient.value === "") {
+      return alert("Você não pode adicionar um ingrediente vazio.");
+    }
+
+    if (newIngredient) {
+      return alert("Você deixou um ingrediente no campo para adicionar, clique para adicioná-lo ou deixe o campo vazio.");
+    }
+
+    await api.post("/dishes", {
+      name,
+      category,
+      price,
+      description: !description ? "Nenhuma descrição informada." : description,
+      ingredients,
+      image: imageFile
+    });
+
+    alert("Prato criado com sucesso!");
+    navigate("/");
   }
 
   return (
@@ -38,51 +100,65 @@ export function NewDish() {
         <Section title="Novo prato">
           <Form>
             <InputFile
-              icon={FiUpload}
-              title="Imagem do prato"
               text="Selecione imagem"
-              id="image"
+              title="Imagem do prato"
+              icon={FiUpload}
+              onChange={handleAddImage}
             />
 
             <Input
-              title="Nome"
               placeholder="Ex: Salada Caesar"
+              title="Nome"
+              onChange={e => setName(e.target.value)}
               id="name"
+              autoComplete="true"
             />
 
-            <Select />
+            <Select changeValue={e => setCategory(e.target.value)} />
+
             <div>
+
               <label htmlFor="ingredients">Ingredientes</label>
-              
-              <div className="ingredients" id="ingredients">
-                <IngredientTag
-                  value="Croutons"
-                />
+              <div id="ingredients">
+
+                {
+                  ingredients.map((ingredient, index) => (
+                    <IngredientTag
+                      key={String(index)}
+                      value={ingredient}
+                      onClick={() => handleRemoveIngredient(ingredient)}
+                    />
+                  ))
+                }
 
                 <IngredientTag
                   isNew
                   placeholder="Adicionar"
+                  value={newIngredient}
                   onChange={e => setNewIngredient(e.target.value)}
-                  onClick={handleTest}
+                  onClick={handleAddIngredient}
+                  id="ingredient-model"
                 />
               </div>
 
             </div>
 
             <Input
-              title="Preço"
               placeholder="R$ 00,00"
+              title="Preço"
+              onChange={e => setPrice(e.target.value)}
               id="price"
             />
 
             <Textarea
               placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
-              id="textarea"
               title="Descrição"
+              onChange={e => setDescription(e.target.value)}
             />
 
             <Button
               title="Salvar Alterações"
+              onClick={handleNewDish}
             />
 
           </Form>
