@@ -83,7 +83,7 @@ export function DishDetails() {
                 <div className="buttons">
                   <Stepper />
                   <ButtonIcon
-                    title={`Pedir - R$${String(price)},00`}
+                    title={`Pedir - R$${data.price}`}
                     icon
                     onClick={handleAdd}
                   />
