@@ -34,6 +34,10 @@ export function Header({ search, setSearch }) {
     navigate("/newdish");
   }
 
+  function handleCart() {
+    navigate("/cart");
+  }
+
   function handleLogout() {
     navigate("/");
     signOut();
@@ -123,6 +127,7 @@ export function Header({ search, setSearch }) {
               order
               title="Pedidos" icon
               quantity={orders}
+              onClick={handleCart}
             />
           }
         </div>
@@ -134,7 +139,7 @@ export function Header({ search, setSearch }) {
 
             :
 
-            <Orders className="mobile">
+            <Orders className="mobile" onClick={handleCart}>
               <PiReceipt size={32} />
               <span>{orders ? orders : 0}</span>
             </Orders>

@@ -10,6 +10,8 @@ export const Container = styled.button`
   background: ${({ theme }) => theme.COLORS.TINTS.TOMATO_100};
   border: none;
   border-radius: 0.25rem;
+  display: flex;
+  gap: 0.5rem;
 
   &:hover {
     background: ${({ theme }) => theme.COLORS.TINTS.TOMATO_200};
