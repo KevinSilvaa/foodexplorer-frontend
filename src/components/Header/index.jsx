@@ -52,7 +52,6 @@ export function Header({ search, setSearch }) {
     async function fetchDishes() {
       const response = await api.get(`/dishes?name=${search}&ingredients=${search}`)
       setDishes(response.data)
-      console.log(search)
     }
 
     fetchDishes();

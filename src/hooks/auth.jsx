@@ -3,6 +3,8 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 import { api } from "../services/api";
 
+import { useParams } from "react-router-dom";
+
 const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
@@ -36,11 +38,6 @@ function AuthProvider({ children }) {
     localStorage.removeItem("@foodexplorer:token");
 
     setData({});
-  }
-
-  // Update dish photo
-  async function updateDishPhoto() {
-    
   }
 
   useEffect(() => {

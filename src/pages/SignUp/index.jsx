@@ -57,7 +57,7 @@ export function SignUp() {
           icon={FiUser}
           title="Seu nome"
           type="text"
-          placeholder="No mínimo 6 caracteres"
+          placeholder="Digite seu nome"
           id="1"
           onChange={e => setName(e.target.value)}
         />

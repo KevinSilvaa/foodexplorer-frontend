@@ -12,10 +12,7 @@ import { useAuth } from "../../hooks/auth";
 // Icons Imports
 import { PiPencil, PiHeart } from "react-icons/pi";
 
-// Image Imports
-import img from "../../assets/Mask group-1.png";
-
-export function Card({ title, price, description, onClick, id, handleFavorite }) {
+export function Card({ title, price, description, onClick, id, handleFavorite, image }) {
 
   const { user } = useAuth();
 
@@ -38,7 +35,7 @@ export function Card({ title, price, description, onClick, id, handleFavorite })
       </button>
 
       <div onClick={onClick}>
-        <img src={img} />
+        <img src={image} alt="Foto do prato" />
         <h2>{title}</h2>
         <p className="desc">{description}</p>
       </div>

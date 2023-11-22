@@ -16,12 +16,10 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
 import { api } from "../../services/api";
 
-// Image Imports
-import img from "../../assets/Mask group.png";
-
 export function DishDetails() {
   const [data, setData] = useState(null);
 
+  const [image, setImage] = useState(null);
   const { user } = useAuth();
 
   const params = useParams();
@@ -33,18 +31,22 @@ export function DishDetails() {
     async function fetchDish() {
       const response = await api.get(`/dishes/${params.id}`);
       setData(response.data);
+      setImage(response.data.image);
     }
-
+    
+    
     fetchDish();
   }, []);
-
+  
   function handleDishEdit() {
     navigate(`/editdish/${params.id}`);
   }
-
+  
   function handleAdd() {
     alert("Adicionado");
   }
+  
+  const imageUrl = `${api.defaults.baseURL}/files/${image}`;
 
   return (
     <Container>
@@ -55,7 +57,7 @@ export function DishDetails() {
           <ButtonText />
 
           <div>
-            <img src={img} />
+            <img src={imageUrl} alt="Imagem do prato" />
             <div className="content">
               <h1>{data.name}</h1>
               <p>{data.description}</p>

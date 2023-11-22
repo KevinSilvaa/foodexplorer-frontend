@@ -13,10 +13,6 @@ import { SplideSlide } from "@splidejs/react-splide";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom"
-
-// Icons Imports
-
 
 // Image Imports
 import background from "../../assets/bannerbg.svg";
@@ -70,6 +66,7 @@ export function Home() {
                       description={dish.description}
                       onClick={() => handleDetails(dish.id)}
                       id={dish.id}
+                      image={`${api.defaults.baseURL}/files/${dish.image}`}
                     />
                   </SplideSlide>
                 ))
@@ -94,6 +91,7 @@ export function Home() {
                       description={dish.description}
                       onClick={() => handleDetails(dish.id)}
                       id={dish.id}
+                      image={`${api.defaults.baseURL}/files/${dish.image}`}
                     />
                   </SplideSlide>
                 ))
@@ -118,6 +116,7 @@ export function Home() {
                       description={dish.description}
                       onClick={() => handleDetails(dish.id)}
                       id={dish.id}
+                      image={`${api.defaults.baseURL}/files/${dish.image}`}
                     />
                   </SplideSlide>
                 ))
@@ -142,6 +141,7 @@ export function Home() {
                       description={dish.description}
                       onClick={() => handleDetails(dish.id)}
                       id={dish.id}
+                      image={`${api.defaults.baseURL}/image/${dish.image}`}
                     />
                   </SplideSlide>
                 ))

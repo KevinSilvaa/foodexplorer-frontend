@@ -34,10 +34,15 @@ export const Container = styled.div`
     justify-content: center;
     gap: 0.75rem;
     cursor: pointer;
+    text-align: center;
 
     img {
       width: 88px;
       height: 88px;
+      border-radius: 50%;
+      
+      color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_100};
+      font-size: 2rem;
     }
     
     h2 {

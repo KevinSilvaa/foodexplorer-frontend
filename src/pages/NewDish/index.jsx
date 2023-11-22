@@ -14,7 +14,7 @@ import { Footer } from "../../components/Footer";
 import { Textarea } from "../../components/Textarea";
 
 // Strategic Imports
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -34,10 +34,12 @@ export function NewDish() {
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
 
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+  
   function handleAddImage(event) {
-    const file = event.target.files[0];
+    const file = event.target.files[0]
     setImageFile(file);
 
     const imagePreview = URL.createObjectURL(file);
@@ -50,12 +52,13 @@ export function NewDish() {
     }
     setIngredients(prevState => [...prevState, newIngredient]);
     setNewIngredient("");
+    document.getElementById("ingredient-model").focus();
   }
-
+  
   function handleRemoveIngredient(deleted) {
     setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
   }
-
+  
   async function handleNewDish() {
     if (!name) {
       return alert("Digite o nome do prato");
@@ -77,18 +80,35 @@ export function NewDish() {
       return alert("Você deixou um ingrediente no campo para adicionar, clique para adicioná-lo ou deixe o campo vazio.");
     }
 
-    await api.post("/dishes", {
-      name,
-      category,
-      price,
-      description: !description ? "Nenhuma descrição informada." : description,
-      ingredients,
-      image: imageFile
-    });
+    setLoading(true);
 
-    alert("Prato criado com sucesso!");
-    navigate("/");
+    const formData = new FormData();
+    formData.append("image", imageFile);
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("price", price);
+    
+    ingredients.map(ingredient => (
+      formData.append("ingredients", ingredient)
+    ));
+
+    await api.post("/dishes", formData)
+    .then(() => {
+      alert("Prato criado com sucesso!");
+      navigate("/");
+    })
+    .catch(error => {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Não foi possível criar o prato!");
+      }
+    }) 
+
+    setLoading(false);
   }
+
 
   return (
     <Container>
@@ -99,12 +119,21 @@ export function NewDish() {
 
         <Section title="Novo prato">
           <Form>
-            <InputFile
-              text="Selecione imagem"
-              title="Imagem do prato"
-              icon={FiUpload}
-              onChange={handleAddImage}
-            />
+
+            <div>
+              {image &&
+                <img
+                  src={image}
+                  alt="Foto do prato"
+                />
+              }
+              <InputFile
+                icon={FiUpload}
+                title="Imagem do prato"
+                text="Selecione imagem"
+                onChange={handleAddImage}
+              />
+            </div>
 
             <Input
               placeholder="Ex: Salada Caesar"
@@ -159,6 +188,7 @@ export function NewDish() {
             <Button
               title="Salvar Alterações"
               onClick={handleNewDish}
+              loading={loading}
             />
 
           </Form>

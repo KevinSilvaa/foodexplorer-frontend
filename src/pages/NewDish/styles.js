@@ -33,6 +33,19 @@ export const Form = styled.form`
     font-size: 1rem;
     color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_400};
   }
+
+  > div:nth-child(1) {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      align-self: center;
+    }
+  }
   
   > div {
     display: flex;
@@ -82,6 +95,15 @@ export const Form = styled.form`
         div {
           width: clamp(100px, 75%, 153px);
         }
+      }
+    }
+
+    div:nth-child(1) {
+      flex-direction: row;
+
+      label {
+        width: 100%;
+        gap: 1rem;
       }
     }
 

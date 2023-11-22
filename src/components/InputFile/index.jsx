@@ -10,7 +10,7 @@ export function InputFile({ icon: Icon, title, id, text, ...rest}) {
         
         <Field>
           {Icon && <Icon size={24} />}
-          <input id={id} {...rest} type="file" />
+          <input id={id} {...rest} type="file" name="image" />
           <p>{text}</p>
         </Field>
       </label>

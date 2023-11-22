@@ -30,6 +30,7 @@ export const Content = styled.div`
     img {
       width: 264px;
       height: 264px;
+      border-radius: 50%;
     }
     
     > .content {
@@ -79,10 +80,13 @@ export const Content = styled.div`
       flex-direction: row;
       gap: 3rem;
       margin-top: 3rem;
-
+      
       img {
         width: 390px;
         height: 390px;
+
+        color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_100};
+        font-size: 2rem;
       }
 
       .content {

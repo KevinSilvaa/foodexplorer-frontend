@@ -40,7 +40,7 @@ export const Form = styled.form`
       height: 120px;
       border-radius: 50%;
       align-self: center;
-  }
+    }
   }
   
   > div {

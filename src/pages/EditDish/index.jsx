@@ -17,11 +17,9 @@ import { Footer } from "../../components/Footer";
 import { api } from "../../services/api";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify'
 
 // Icons Imports
 import { FiUpload } from "react-icons/fi";
-
 
 export function EditDish() {
   const [data, setData] = useState(null);
@@ -38,10 +36,11 @@ export function EditDish() {
   const [ingredients, setingredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
 
-  const imageURL = data && `${api.defaults.baseURL}/files/${data.image}`;
+  const [image, setImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
 
-  const [image, setImage] = useState();
-  const [imageFile, setImageFile] = useState(null)
+  const params = useParams();
+  const navigate = useNavigate();
 
   function handleChangeImage(event) {
     const file = event.target.files[0];
@@ -50,9 +49,6 @@ export function EditDish() {
     const imagePreview = URL.createObjectURL(file);
     setImage(imagePreview);
   }
-
-  const params = useParams();
-  const navigate = useNavigate();
 
   function handleAddIngredient() {
     if (newIngredient === "") {
@@ -89,29 +85,16 @@ export function EditDish() {
     }
 
     setLoading(true);
-  
-    const formValue = {
-      "image": imageFile,
-      "name": name,
-      "category": category,
-      "price": price,
-      "description": description,
-      "ingredients": ingredients
-    }
 
-    await api.put(`/dishes/${params.id}`, formValue)
-      .then(() => {
-        toast.success("Prato atualizado com sucesso!");
-        navigate(-1);
-      })
-      .catch(error => {
-        if (error.response) {
-          alert(error.response.data.message);
-          console.log(formValue)
-        } else {
-          alert("Não foi possível atualizar o prato!");
-        }
-      });
+    api.put(`/dishes/${params.id}`, { name: name, category: category, price: price, description: description, ingredients: ingredients });
+
+    const formData = new FormData();
+    formData.append("image", imageFile);
+
+    api.patch(`/dishes/image/${params.id}`, formData);
+
+    alert("Prato atualizado com sucesso!");
+    navigate("/");
 
     setLoading(false);
   }
@@ -123,9 +106,12 @@ export function EditDish() {
     if (!confirm) {
       return;
     }
+
+    setLoadingDelete(true);
+
     api.delete(`/dishes/${params.id}`)
       .then(() => {
-        toast.success("Prato excluido com sucesso!");
+        alert("Prato excluido com sucesso!");
         navigate("/");
         setLoadingDelete(false);
       })
@@ -134,14 +120,14 @@ export function EditDish() {
   useEffect(() => {
     async function fetchDish() {
       const response = await api.get(`/dishes/${params.id}`);
-      setData(response.data);
 
-      const { name, category, price, description, ingredients } = response.data;
+      const { name, category, price, description, ingredients, imageFile } = response.data;
       setName(name);
       setPrice(price);
       setCategory(category);
       setDescription(description);
       setingredients(ingredients.map(ingredient => ingredient.name));
+      setImageFile(imageFile);
     }
 
     fetchDish();
@@ -151,87 +137,86 @@ export function EditDish() {
     <Container>
       <Header />
 
-      {data &&
-        <Content id="content">
-          <ButtonText />
+      <Content id="content">
+        <ButtonText />
 
-          <Section title="Editar prato">
-            <Form>
+        <Section title="Editar prato">
+          <Form>
 
-              <div>
-                {image &&
-                  <img
-                    src={image ? image : imageURL}
-                    alt="Foto do prato"
-                  />
+            <div>
+              {image &&
+                <img
+                  src={image}
+                  alt="Foto do prato"
+                />
+              }
+              <InputFile
+                icon={FiUpload}
+                title="Imagem do prato"
+                text="Selecione imagem"
+                onChange={handleChangeImage}
+              />
+            </div>
+
+            <Input
+              title="Nome"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+
+            <Select value={category} />
+
+            <div>
+              <label htmlFor="ingredients">Ingredientes</label>
+              <div id="ingredients">
+                {
+                  ingredients.map((ingredient, index) => (
+                    <IngredientTag
+                      key={String(index)}
+                      value={ingredient}
+                      onClick={() => handleRemoveIngredient(ingredient)}
+                    />
+                  ))
                 }
-                <InputFile
-                  icon={FiUpload}
-                  title="Imagem do prato"
-                  text="Selecione imagem"
-                  onChange={handleChangeImage}
+
+                <IngredientTag
+                  isNew
+                  placeholder="Adicionar"
+                  value={newIngredient}
+                  onChange={e => setNewIngredient(e.target.value)}
+                  onClick={handleAddIngredient}
+                  id="ingredient-model"
                 />
               </div>
+            </div>
 
-              <Input
-                title="Nome"
-                value={name}
-                onChange={e => setName(e.target.value)}
+            <Input
+              title="Preço"
+              value={price}
+              onChange={e => setPrice(e.target.value)}
+            />
+
+            <Textarea
+              value={description}
+              title="Descrição"
+              onChange={e => setDescription(e.target.value)}
+            />
+
+            <div className="buttons">
+              <Button
+                title="Excluir prato"
+                onClick={handleRemoveDish}
+                loading={loadingDelete}
               />
-
-              <Select value={category} />
-
-              <div>
-                <label htmlFor="ingredients">Ingredientes</label>
-                <div id="ingredients">
-                  {
-                    ingredients.map((ingredient, index) => (
-                      <IngredientTag
-                        key={String(index)}
-                        value={ingredient}
-                        onClick={() => handleRemoveIngredient(ingredient)}
-                      />
-                    ))
-                  }
-
-                  <IngredientTag
-                    isNew
-                    placeholder="Adicionar"
-                    value={newIngredient}
-                    onChange={e => setNewIngredient(e.target.value)}
-                    onClick={handleAddIngredient}
-                    id="ingredient-model"
-                  />
-                </div>
-              </div>
-
-              <Input
-                title="Preço"
-                value={price}
-                onChange={e => setPrice(e.target.value)}
+              <Button
+                title="Salvar Alterações"
+                onClick={handleUpdateDish}
+                loading={loading}
               />
-
-              <Textarea
-                value={description}
-                title="Descrição"
-                onChange={e => setDescription(e.target.value)}
-              />
-
-              <div className="buttons">
-                <Button
-                  title="Excluir prato"
-                  onClick={handleRemoveDish}
-                />
-                <Button
-                  title="Salvar Alterações"
-                  onClick={handleUpdateDish}
-                  loading={loading}
-                />
-              </div>
-            </Form>
-          </Section>
-        </Content>
-      }
+            </div>
+          </Form>
+        </Section>
+      </Content>
 
       <Footer />
     </Container>
