@@ -6,11 +6,17 @@ import { Payment } from "../../components/Payments";
 import { Header } from "../../components/Header";
 import { ItemCarts } from "../../components/ItemsCart";
 import { Footer } from "../../components/Footer";
+import { Button } from "../../components/Button";
 
 // Strategic Imports
 
 
 export function Cart() {
+
+  function handlePayment() {
+    document.getElementById("item-carts").style.display = "none";
+    document.getElementById("payment").style.display = "block";
+  }
 
   return (
     <Container>
@@ -19,6 +25,10 @@ export function Cart() {
       <Content>
         <div id="item-carts">
           <ItemCarts />
+
+          <button className="button-payment" onClick={handlePayment}>
+            Avançar
+          </button>
         </div>
 
         <div id="payment" className="disabled">

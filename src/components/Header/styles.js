@@ -125,25 +125,43 @@ export const Content = styled.div`
       display: none;
     }
 
+    .buttons {
+      display: flex;
+      gap: 2rem;
+      
+      button {
+        background: transparent;
+        color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_300};
+        font-family: "Roboto";
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          filter: brightness(0.8);
+        }
+      }
+
+      
+    }
+
     > div:nth-child(3) {
       display: flex;
       width: 25%;
     }
 
-    button:first-child {
+    .orders {
       background: ${({ theme }) => theme.COLORS.TINTS.TOMATO_200};
     }
   }
 
   @media screen and (min-width: 1024px) {
     > div:nth-child(3) {
-      width: 40%;
+      width: 25%;
     }
   }
 
   @media screen and (min-width: 1440px) {
     > div:nth-child(3) {
-      width: 60%;
+      width: 30%;
     }
   }
 `;

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
 
   section {
     display: flex;
@@ -28,10 +27,11 @@ export const Container = styled.div`
       align-self: end;
     }
 
-    @media screen and (min-width: 1024px) {
-      .button {
-        display: none;
-      }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .button {
+      display: none;
     }
   }
 `;

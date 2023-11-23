@@ -30,6 +30,14 @@ export function Header({ search, setSearch }) {
   // Check if the user is admin
   const isAdmin = user.role === "admin";
 
+  function handleFavorites() {
+    navigate("/favorites");
+  }
+
+  function handleOrder() {
+    navigate("/orders");
+  }
+
   function handleNewDish() {
     navigate("/newdish");
   }
@@ -72,23 +80,34 @@ export function Header({ search, setSearch }) {
 
       <nav className="hamb hide">
         <div>
-          <InputSearch 
+          <InputSearch
             placeholder="Busque por pratos ou ingredientes"
             icon
             onChange={e => setSearch(e.target.value)}
           />
 
           <div className="buttons">
+
             {isAdmin ?
-              <button  onClick={handleNewDish}>
+              <button onClick={handleNewDish}>
                 Novo prato
               </button>
+
               :
-              ""
+
+              <button onClick={handleOrder}>
+                Histórico de pedidos
+              </button>
             }
+
+            <button onClick={handleFavorites}>
+              Meus Favoritos
+            </button>
             <button onClick={handleLogout}>
               Sair
             </button>
+
+
           </div>
         </div>
       </nav>
@@ -108,22 +127,44 @@ export function Header({ search, setSearch }) {
           </Link>
         </Logo>
 
-        <InputSearch 
-            placeholder="Busque por pratos ou ingredientes"
-            icon
-            onChange={e => setSearch(e.target.value)}
-          />
+        <InputSearch
+          placeholder="Busque por pratos ou ingredientes"
+          icon
+          onChange={e => setSearch(e.target.value)}
+        />
+
+        <div className="desktop buttons">
+          <button onClick={handleFavorites}>
+            Meus favoritos
+          </button>
+          {
+            isAdmin ?
+              <button onClick={handleNewDish}>
+                Novo prato
+              </button>
+
+              :
+
+              <button onClick={handleOrder}>
+                Histórico de pedidos
+              </button>
+          }
+        </div>
 
         <div className="desktop">
           {isAdmin ?
             <ButtonIcon
-              title="Novo prato"
-              onClick={handleNewDish}
+              className="orders"
+              order
+              title="Pedidos" icon
+              quantity={orders}
+              onClick={handleOrder}
             />
 
             :
 
             <ButtonIcon
+              className="orders"
               order
               title="Pedidos" icon
               quantity={orders}

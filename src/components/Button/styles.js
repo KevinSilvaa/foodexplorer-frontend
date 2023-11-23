@@ -11,6 +11,8 @@ export const Container = styled.button`
   border: none;
   border-radius: 0.25rem;
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0.5rem;
 
   &:hover {

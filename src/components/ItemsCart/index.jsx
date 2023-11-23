@@ -3,7 +3,6 @@ import { Container, Content } from "./styles";
 
 // Components Imports
 import { Section } from "../Section";
-import { Button } from "../Button";
 
 // Strategic Imports
 
@@ -69,9 +68,6 @@ export function ItemCarts() {
 
         <p>Total: R$ {priceTotal}</p>
 
-        <Button 
-          title="Avançar"
-        />
       </Section>
 
     </Container>
