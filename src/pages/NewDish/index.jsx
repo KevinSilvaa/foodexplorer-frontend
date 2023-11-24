@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 
 // Icons Imports
 import { FiUpload } from "react-icons/fi";
+import { LuBeef, LuCakeSlice, LuCheck, LuCupSoda, LuSalad } from "react-icons/lu";
 
 export function NewDish() {
   const [name, setName] = useState("");
@@ -37,7 +38,13 @@ export function NewDish() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  
+
+  function handleClick() {
+    document.querySelectorAll("#category-select input").forEach(input => {
+      input.click(document.getElementById("options-view"));
+    });
+  }
+
   function handleAddImage(event) {
     const file = event.target.files[0]
     setImageFile(file);
@@ -54,11 +61,11 @@ export function NewDish() {
     setNewIngredient("");
     document.getElementById("ingredient-model").focus();
   }
-  
+
   function handleRemoveIngredient(deleted) {
     setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
   }
-  
+
   async function handleNewDish() {
     if (!name) {
       return alert("Digite o nome do prato");
@@ -88,23 +95,23 @@ export function NewDish() {
     formData.append("description", description);
     formData.append("category", category);
     formData.append("price", price);
-    
+
     ingredients.map(ingredient => (
       formData.append("ingredients", ingredient)
     ));
 
     await api.post("/dishes", formData)
-    .then(() => {
-      alert("Prato criado com sucesso!");
-      navigate("/");
-    })
-    .catch(error => {
-      if (error.response) {
-        alert(error.response.data.message);
-      } else {
-        alert("Não foi possível criar o prato!");
-      }
-    }) 
+      .then(() => {
+        alert("Prato criado com sucesso!");
+        navigate("/");
+      })
+      .catch(error => {
+        if (error.response) {
+          alert(error.response.data.message);
+        } else {
+          alert("Não foi possível criar o prato!");
+        }
+      })
 
     setLoading(false);
   }
@@ -143,7 +150,59 @@ export function NewDish() {
               autoComplete="true"
             />
 
-            <Select changeValue={e => setCategory(e.target.value)} />
+            <Select changeValue={e => setCategory(e.target.value)}>
+              <li className="option" onClick={handleClick}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="Refeições"
+                  data-label="Refeições"
+                />
+
+                <LuSalad />
+                <span className="label">Refeições</span>
+                <LuCheck />
+              </li>
+
+              <li className="option" onClick={handleClick}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="Pratos principais"
+                  data-label="Pratos principais"
+                />
+
+                <LuBeef />
+                <span className="label">Pratos principais</span>
+                <LuCheck />
+              </li>
+
+              <li className="option" onClick={handleClick}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="Bebidas"
+                  data-label="Bebidas"
+                />
+
+                <LuCupSoda />
+                <span className="label">Bebidas</span>
+                <LuCheck />
+              </li>
+
+              <li className="option" onClick={handleClick}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="Sobremesas"
+                  data-label="Sobremesas"
+                />
+
+                <LuCakeSlice />
+                <span className="label">Sobremesas</span>
+                <LuCheck />
+              </li>
+            </Select>
 
             <div>
 

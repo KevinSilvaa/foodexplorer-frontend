@@ -20,6 +20,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 // Icons Imports
 import { FiUpload } from "react-icons/fi";
+import { LuBeef, LuCakeSlice, LuCheck, LuCupSoda, LuSalad } from "react-icons/lu";
 
 export function EditDish() {
   const [data, setData] = useState(null);
@@ -41,6 +42,12 @@ export function EditDish() {
 
   const params = useParams();
   const navigate = useNavigate();
+
+  function handleClick() {
+    document.querySelectorAll("#category-select input").forEach(input => {
+      input.click(document.getElementById("options-view"));
+    });
+  }
 
   function handleChangeImage(event) {
     const file = event.target.files[0];
@@ -164,7 +171,59 @@ export function EditDish() {
               onChange={e => setName(e.target.value)}
             />
 
-            <Select value={category} />
+            <Select value={category} changeValue={e => setCategory(e.target.value)}>
+              <li className="option" onClick={handleClick}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="Refeições"
+                  data-label="Refeições"
+                />
+
+                <LuSalad />
+                <span className="label">Refeições</span>
+                <LuCheck />
+              </li>
+
+              <li className="option" onClick={handleClick}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="Pratos principais"
+                  data-label="Pratos principais"
+                />
+
+                <LuBeef />
+                <span className="label">Pratos principais</span>
+                <LuCheck />
+              </li>
+
+              <li className="option" onClick={handleClick}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="Bebidas"
+                  data-label="Bebidas"
+                />
+
+                <LuCupSoda />
+                <span className="label">Bebidas</span>
+                <LuCheck />
+              </li>
+
+              <li className="option" onClick={handleClick}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="Sobremesas"
+                  data-label="Sobremesas"
+                />
+
+                <LuCakeSlice />
+                <span className="label">Sobremesas</span>
+                <LuCheck />
+              </li>
+            </Select>
 
             <div>
               <label htmlFor="ingredients">Ingredientes</label>

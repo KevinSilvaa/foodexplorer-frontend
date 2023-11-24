@@ -161,14 +161,14 @@ export function Payment() {
                 className="pix"
                 icon={FaPix}
                 title="Pix"
-                disabled="true"
+                disabled={true}
               />
 
               <Button
                 className="card"
                 icon={PiCreditCard}
                 title="Crédito"
-                disabled="true"
+                disabled={true}
               />
             </div>
             <div className="payment-methods">
@@ -191,14 +191,14 @@ export function Payment() {
                 className="pix"
                 icon={FaPix}
                 title="Pix"
-                disabled="true"
+                disabled={true}
               />
 
               <Button
                 className="card"
                 icon={PiCreditCard}
                 title="Crédito"
-                disabled="true"
+                disabled={true}
               />
             </div>
             <div className="payment-methods">
@@ -221,14 +221,14 @@ export function Payment() {
                 className="pix"
                 icon={FaPix}
                 title="Pix"
-                disabled="true"
+                disabled={true}
               />
 
               <Button
                 className="card"
                 icon={PiCreditCard}
                 title="Crédito"
-                disabled="true"
+                disabled={true}
               />
             </div>
             <div className="payment-methods">

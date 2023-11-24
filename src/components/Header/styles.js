@@ -115,7 +115,6 @@ export const Content = styled.div`
 
   @media screen and (min-width: 850px) {
     gap: 2rem;
-    justify-content: center;
 
     .desktop {
       display: block;
@@ -139,8 +138,6 @@ export const Content = styled.div`
           filter: brightness(0.8);
         }
       }
-
-      
     }
 
     > div:nth-child(3) {
@@ -161,7 +158,7 @@ export const Content = styled.div`
 
   @media screen and (min-width: 1440px) {
     > div:nth-child(3) {
-      width: 30%;
+      width: 40%;
     }
   }
 `;

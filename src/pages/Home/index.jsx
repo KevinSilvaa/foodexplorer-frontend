@@ -141,7 +141,7 @@ export function Home() {
                       description={dish.description}
                       onClick={() => handleDetails(dish.id)}
                       id={dish.id}
-                      image={`${api.defaults.baseURL}/image/${dish.image}`}
+                      image={`${api.defaults.baseURL}/files/${dish.image}`}
                     />
                   </SplideSlide>
                 ))

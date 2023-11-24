@@ -6,7 +6,7 @@ export const Container = styled.div`
   grid-template-areas:
   "header"
   "content";
-  grid-template-rows: 7rem auto;
+  grid-template-rows: 6.5rem auto;
 `;
 
 export const Content = styled.main`

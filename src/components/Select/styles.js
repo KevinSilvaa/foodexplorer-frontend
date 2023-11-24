@@ -70,12 +70,15 @@ export const Container = styled.div`
       &:nth-child(1) {
         color: ${({ theme }) => theme.COLORS.TINTS.MINT_100};
       }
+
       &:nth-child(2) {
         color: ${({ theme }) => theme.COLORS.TINTS.TOMATO_400};
       }
+
       &:nth-child(3) {
         color: ${({ theme }) => theme.COLORS.TINTS.CAKE_200};
       }
+      
       &:nth-child(4) {
         color: ${({ theme }) => theme.COLORS.TINTS.CARROT_100};
       }

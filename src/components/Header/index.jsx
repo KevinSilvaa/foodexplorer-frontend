@@ -89,9 +89,15 @@ export function Header({ search, setSearch }) {
           <div className="buttons">
 
             {isAdmin ?
-              <button onClick={handleNewDish}>
-                Novo prato
-              </button>
+              <>
+                <button onClick={handleNewDish}>
+                  Novo prato
+                </button>
+
+                <button onClick={handleOrder}>
+                  Pedidos
+                </button>
+              </>
 
               :
 
@@ -103,6 +109,7 @@ export function Header({ search, setSearch }) {
             <button onClick={handleFavorites}>
               Meus Favoritos
             </button>
+
             <button onClick={handleLogout}>
               Sair
             </button>
