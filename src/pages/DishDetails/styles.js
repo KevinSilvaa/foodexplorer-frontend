@@ -4,11 +4,9 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
 
-  @media screen and (min-width: 1024px) {
-    footer {
-      position: absolute;
-      bottom: 0;
-    }
+  footer {
+    position: absolute;
+    bottom: 0;
   }
 `;
 

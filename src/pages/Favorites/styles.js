@@ -2,10 +2,31 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
+  height: 100%;
+
+  footer {
+    position: absolute;
+    bottom: 0;
+  }
+
+  section {
+    height: 100%;
+    
+    h1:last-child {
+      margin-top: 15rem;
+      font-size: 2.5rem;
+      line-height: 2.5rem;
+      text-align: center;
+    }
+  }
 
   @media screen and (min-width: 850px) {
     section {
       padding: 2rem 7.75rem;
+    }
+
+    footer {
+      position: relative;
     }
   }
 `;

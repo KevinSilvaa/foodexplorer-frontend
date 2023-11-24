@@ -32,8 +32,7 @@ export function DishDetails() {
       const response = await api.get(`/dishes/${params.id}`);
       setData(response.data);
       setImage(response.data.image);
-    }
-    
+    } 
     
     fetchDish();
   }, []);

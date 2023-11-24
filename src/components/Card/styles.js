@@ -8,7 +8,7 @@ export const Container = styled.div`
   gap: 0.75rem;
   position: relative;
   width: 210px;
-  height: 292px;
+  height: 350px;
   padding: 1.5rem;
   background: ${({ theme }) => theme.COLORS.DARK.DARK_200};
   border: 1px solid ${({ theme }) => theme.COLORS.DARK.DARK_300};
@@ -70,7 +70,7 @@ export const Container = styled.div`
   @media screen and (min-width: 850px) {
     gap: 1rem;
     width: 304px;
-    height: 462px;
+    height: 500px;
 
     .desc {
       display: block;

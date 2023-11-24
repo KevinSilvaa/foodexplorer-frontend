@@ -12,7 +12,6 @@ import { SplideSlide } from "@splidejs/react-splide";
 // Strategic Imports
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 // Image Imports
 import background from "../../assets/bannerbg.svg";
@@ -20,12 +19,6 @@ import background from "../../assets/bannerbg.svg";
 export function Home() {
   const [dishes, setDishes] = useState([]);
   const [search, setSearch] = useState("");
-
-  const navigate = useNavigate();
-
-  function handleDetails(id) {
-    navigate(`/dishdetails/${id}`)
-  }
 
   useEffect(() => {
     async function fetchDishes() {
@@ -60,13 +53,7 @@ export function Home() {
                 .map(dish => (
                   <SplideSlide key={dish.id}>
                     <Card
-                      key={String(dish.id)}
-                      title={dish.name}
-                      price={dish.price}
-                      description={dish.description}
-                      onClick={() => handleDetails(dish.id)}
-                      id={dish.id}
-                      image={`${api.defaults.baseURL}/files/${dish.image}`}
+                      data={dish}
                     />
                   </SplideSlide>
                 ))
@@ -85,13 +72,7 @@ export function Home() {
                 .map(dish => (
                   <SplideSlide key={dish.id}>
                     <Card
-                      key={String(dish.id)}
-                      title={dish.name}
-                      price={dish.price}
-                      description={dish.description}
-                      onClick={() => handleDetails(dish.id)}
-                      id={dish.id}
-                      image={`${api.defaults.baseURL}/files/${dish.image}`}
+                      data={dish}
                     />
                   </SplideSlide>
                 ))
@@ -110,13 +91,7 @@ export function Home() {
                 .map(dish => (
                   <SplideSlide key={dish.id}>
                     <Card
-                      key={String(dish.id)}
-                      title={dish.name}
-                      price={dish.price}
-                      description={dish.description}
-                      onClick={() => handleDetails(dish.id)}
-                      id={dish.id}
-                      image={`${api.defaults.baseURL}/files/${dish.image}`}
+                      data={dish}
                     />
                   </SplideSlide>
                 ))
@@ -135,13 +110,7 @@ export function Home() {
                 .map(dish => (
                   <SplideSlide key={dish.id}>
                     <Card
-                      key={String(dish.id)}
-                      title={dish.name}
-                      price={dish.price}
-                      description={dish.description}
-                      onClick={() => handleDetails(dish.id)}
-                      id={dish.id}
-                      image={`${api.defaults.baseURL}/files/${dish.image}`}
+                      data={dish}
                     />
                   </SplideSlide>
                 ))
