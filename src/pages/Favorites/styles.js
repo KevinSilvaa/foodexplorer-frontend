@@ -49,21 +49,27 @@ export const Content = styled.main`
     gap: 1rem;
     padding: 1rem 0;
 
-    h2 {
-      color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_300};
-      font-size: 1.25rem;
-      font-weight: 500;
-      line-height: 2rem;
-      font-family: "Poppins";
-    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
 
-    button {
-      background: transparent;
-      border: none;
-      color: ${({ theme }) => theme.COLORS.TINTS.TOMATO_400};
-      font-size: 0.75rem;
-      font-family: "Roboto";
-      line-height: 1.25rem;
+      h2 {
+        color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_300};
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 2rem;
+        font-family: "Poppins";
+      }
+
+      button {
+        background: transparent;
+        border: none;
+        color: ${({ theme }) => theme.COLORS.TINTS.TOMATO_400};
+        font-size: 0.75rem;
+        font-family: "Roboto";
+        line-height: 1.25rem;
+      }
     }
 
     img {
@@ -87,7 +93,7 @@ export const Content = styled.main`
     }
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1280px) {
       .all-dishes {
         grid-template-columns: repeat(4, 1fr);
         gap: 3rem;

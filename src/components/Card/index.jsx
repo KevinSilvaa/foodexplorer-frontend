@@ -17,6 +17,8 @@ import { PiPencil, PiHeart, PiHeartFill } from "react-icons/pi";
 export function Card({ data, ...rest }) {
   const [favorite, setFavorite] = useState(false);
   const [favorites, setFavorites] = useState([]);
+  const [favoritesList, setFavoritesList] = useState(JSON.parse(localStorage.getItem("@foodexplorer:favorites")));
+  const [quantity, setQuantity] = useState(1);
 
   const { user } = useAuth();
 
@@ -33,11 +35,38 @@ export function Card({ data, ...rest }) {
     navigate(`/dishdetails/${data.id}`)
   }
 
+  async function saveFavorites() {
+    const response = await api.get("/favorites");
+
+    for (let dish of response.data) {
+      if (dish.dish_id === data.id) {
+        const existingFavorites = JSON.parse(localStorage.getItem("@foodexplorer:favorites"));
+        existingFavorites == null ? [] : existingFavorites;
+
+        if (existingFavorites.find(e => e.dish_id === data.id)) {
+          setFavoritesList(existingFavorites);
+          return;
+        }
+
+        existingFavorites.push(dish);
+        localStorage.setItem("@foodexplorer:favorites", JSON.stringify(existingFavorites));
+        setFavoritesList(JSON.parse(localStorage.getItem("@foodexplorer:favorites")));
+      }
+    }
+  }
+
+  function updateFavorites() {
+    const favorites = JSON.parse(localStorage.getItem("@foodexplorer:favorites"));
+    const newFavoritesList = favorites.filter(e => e.dish_id !== data.id);
+    setFavoritesList(newFavoritesList)
+    localStorage.setItem("@foodexplorer:favorites", JSON.stringify(newFavoritesList));
+  }
+
   async function handleAddFavorite() {
     api.post("/favorites", { dish_id: data.id })
       .then(() => {
         setFavorite(true);
-        setFavorites(prevState => [...prevState, data.id]);
+        saveFavorites();
         alert("Prato adicionado aos favoritos!");
       })
       .catch(error => {
@@ -53,7 +82,7 @@ export function Card({ data, ...rest }) {
     api.delete(`/favorites/${data.id}`)
       .then(() => {
         setFavorite(false);
-        setFavorites(prevState => prevState.filter(favoriteId => favoriteId !== data.id));
+        updateFavorites();
         alert("Prato removido dos favoritos!");
       })
       .catch(error => {
@@ -65,18 +94,48 @@ export function Card({ data, ...rest }) {
       })
   }
 
-  function handleAdd() {
-    alert("Adicionado");
+  async function handleRequest() {
+    await api.post("/requests", {
+      dish_id: data.id,
+      quantity
+    })
+      .then(() => {
+        alert("Prato adicionado com sucesso ao carrinho de compras");
+      })
+      .catch(error => {
+        if (error.response) {
+          alert(error.response.data.message);
+        } else {
+          alert("Não foi possível adicionar o prato ao carrinho de compras");
+        }
+      })
   }
 
   useEffect(() => {
     async function fetchFavorites() {
-      const response = await api.get(`/favorites`)
+      const response = await api.get(`/favorites`);
       setFavorite(response.data);
     }
 
     fetchFavorites();
   }, [data.id])
+
+  useEffect(() => {
+    async function saveFavorites() {
+      const response = await api.get("/favorites");
+
+      for (let dish of response.data) {
+        if (dish.dish_id === data.id) {
+          const existingFavorites = JSON.parse(localStorage.getItem("@foodexplorer:favorites"));
+
+          existingFavorites == null ? [] : existingFavorites;
+          setFavoritesList(existingFavorites);
+        }
+      }
+    }
+
+    saveFavorites();
+  }, [favorites])
 
   return (
     <Container {...rest}>
@@ -105,7 +164,7 @@ export function Card({ data, ...rest }) {
           :
 
           <>
-            {favorite && favorites.length > 0 ?
+            {favoritesList.find(e => e.dish_id === data.id) ?
               <button className="favorite" onClick={handleRemoveFavorite}>
                 <PiHeartFill size={24} />
               </button>
@@ -130,11 +189,11 @@ export function Card({ data, ...rest }) {
             </span>
 
             <div className="buttons">
-              <Stepper />
+              <Stepper quantity={quantity} setQuantity={setQuantity} />
 
               <Button
                 title="Incluir"
-                onClick={handleAdd}
+                onClick={handleRequest}
               />
             </div>
           </>

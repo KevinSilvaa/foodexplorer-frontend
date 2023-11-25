@@ -11,9 +11,8 @@ import { Footer } from "../../components/Footer";
 import { useAuth } from "../../hooks/auth";
 
 // Icons Imports
-import { LuClock, LuCheck } from "react-icons/lu";
+import { LuCheck } from "react-icons/lu";
 import { FaCircle } from "react-icons/fa6";
-import img from "../../assets/Logo.svg";
 
 export function Orders() {
 

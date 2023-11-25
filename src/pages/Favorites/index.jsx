@@ -13,9 +13,18 @@ import { api } from "../../services/api";
 export function Favorites() {
   const [favorites, setFavorites] = useState([]);
 
+  function updateFavorites(id) {
+    const favorites = JSON.parse(localStorage.getItem("@foodexplorer:favorites"));
+    const newFavoritesList = favorites.filter(e => e.dish_id !== id);
+    localStorage.setItem("@foodexplorer:favorites", JSON.stringify(newFavoritesList));
+  }
+
   async function handleRemoveFavorite(id) {
     await api.delete(`/favorites/${id}`);
+    updateFavorites(id);
+
     alert("Prato removido dos favoritos com sucesso!");
+    
 
     setFavorites(prevState => prevState.filter(favorite => favorite.dish_id !== id));
   }

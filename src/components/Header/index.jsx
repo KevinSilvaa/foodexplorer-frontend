@@ -9,19 +9,20 @@ import { ButtonIcon } from "../ButtonIcon";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 
 // Icons Imports
 import { PiReceipt, PiX } from "react-icons/pi";
-import { FiLogOut, FiMenu, FiSearch } from "react-icons/fi";
+import { FiLogOut, FiMenu } from "react-icons/fi";
 
 // Image Imports
 import logo from "../../assets/Logo.svg";
-import { api } from "../../services/api";
 
 export function Header({ search, setSearch }) {
-  const [orders, setOrders] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [dishes, setDishes] = useState([]);
+  const [userRequests, setUserRequests] = useState();
+  const [ordersPending, setOrdersPending] = useState();
 
   const { signOut, user } = useAuth();
 
@@ -68,6 +69,16 @@ export function Header({ search, setSearch }) {
 
     fetchDishes();
   }, [search])
+
+  useEffect(() => {
+    async function handleUserRequests() {
+      const response = await api.get("/requests");
+
+      setUserRequests([...response.data]);
+    }
+
+    handleUserRequests();
+  }, [userRequests])
 
   return (
     <Container>
@@ -164,7 +175,7 @@ export function Header({ search, setSearch }) {
               className="orders"
               order
               title="Pedidos" icon
-              quantity={orders}
+              quantity={ordersPending}
               onClick={handleOrder}
             />
 
@@ -174,9 +185,10 @@ export function Header({ search, setSearch }) {
               className="orders"
               order
               title="Pedidos" icon
-              quantity={orders}
+              quantity={userRequests ? userRequests.length : 0}
               onClick={handleCart}
             />
+
           }
         </div>
 
@@ -189,7 +201,7 @@ export function Header({ search, setSearch }) {
 
             <Orders className="mobile" onClick={handleCart}>
               <PiReceipt size={32} />
-              <span>{orders ? orders : 0}</span>
+              <span>{userRequests ? userRequests.length : 0}</span>
             </Orders>
           }
         </div>
