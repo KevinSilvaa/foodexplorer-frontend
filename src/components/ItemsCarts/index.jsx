@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 // Strategic Imports
 import { api } from "../../services/api";
 
-export function ItemCarts() {
+export function ItemsCarts() {
 
   const [userCart, setUserCart] = useState([]);
   const [finalPrice, setFinalPrice] = useState("");

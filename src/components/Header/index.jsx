@@ -62,15 +62,6 @@ export function Header({ search, setSearch }) {
   }
 
   useEffect(() => {
-    async function fetchDishes() {
-      const response = await api.get(`/dishes?name=${search}&ingredients=${search}`)
-      setDishes(response.data)
-    }
-
-    fetchDishes();
-  }, [search])
-
-  useEffect(() => {
     async function handleUserRequests() {
       const response = await api.get("/requests");
 

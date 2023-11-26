@@ -74,6 +74,25 @@ export function Payment() {
       return alert("Preencha todos os campos corretamente");
     }
 
+    
+    const regexCardNumber = /(?<!\d)\d{16}(?!\d)|(?<!\d[ _-])(?<!\d)\d{4}(?:[_ -]\d{4}){3}(?![_ -]?\d)/;
+    
+    if (!regexCardNumber.test(card)) {
+      return alert("Preencha o número do cartão corretamente.");
+    }
+
+    const regexValidityDate = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
+
+    if (!regexValidityDate.test(validity)) {
+      return alert("Preencha a validade do cartão corretamente.");
+    }
+
+    const cvcValidity = /^[0-9]{3}$/;
+
+    if (!cvcValidity.test(securityCode)) {
+      return alert("Preencha o código de segurança do cartão corretamente");
+    }
+
     clockActive();
   }
 

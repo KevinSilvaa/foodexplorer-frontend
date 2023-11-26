@@ -2,9 +2,9 @@
 import { Container, Content } from "./styles";
 
 // Components Imports
-import { Payment } from "../../components/Payments";
+import { Payment } from "../../components/Payment";
 import { Header } from "../../components/Header";
-import { ItemCarts } from "../../components/ItemsCart";
+import { ItemsCarts } from "../../components/ItemsCarts";
 import { Footer } from "../../components/Footer";
 
 // Strategic Imports
@@ -23,7 +23,7 @@ export function Cart() {
 
       <Content>
         <div id="item-carts">
-          <ItemCarts />
+          <ItemsCarts />
 
           <button className="button-payment" onClick={handlePayment}>
             Avançar
