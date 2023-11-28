@@ -5,9 +5,9 @@ import { Container, Field } from "./styles";
 import { useEffect, useState } from "react";
 
 // Icons Imports
-import { LuBeef, LuCakeSlice, LuCheck, LuChevronDown, LuChevronUp, LuCupSoda, LuSalad } from "react-icons/lu"
+import { LuChevronDown, LuChevronUp } from "react-icons/lu"
 
-export function Select({ changeValue, value, children, click }) {
+export function Select({ changeValue, value, children }) {
 
   const [isOpen, setIsOpen] = useState(false);
 

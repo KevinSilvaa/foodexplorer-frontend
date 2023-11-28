@@ -5,8 +5,9 @@ import { Container, Content } from "./styles";
 import { Section } from "../Section";
 
 // Strategic Imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 
 // Icons Imports
 import { PiCreditCard } from "react-icons/pi";
@@ -30,6 +31,10 @@ export function Payment() {
   const [card, setCard] = useState("");
   const [validity, setValidity] = useState("");
   const [securityCode, setSecurityCode] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  const [requests, setRequests] = useState();
 
   const navigate = useNavigate();
 
@@ -65,8 +70,7 @@ export function Payment() {
 
     setTimeout(() => {
       navigate("/");
-      alert("Pedido realizado com sucesso!");
-    }, 3000);
+    }, 5000);
   }
 
   async function handlePaymentProgress() {
@@ -74,9 +78,8 @@ export function Payment() {
       return alert("Preencha todos os campos corretamente");
     }
 
-    
     const regexCardNumber = /(?<!\d)\d{16}(?!\d)|(?<!\d[ _-])(?<!\d)\d{4}(?:[_ -]\d{4}){3}(?![_ -]?\d)/;
-    
+
     if (!regexCardNumber.test(card)) {
       return alert("Preencha o número do cartão corretamente.");
     }
@@ -93,8 +96,40 @@ export function Payment() {
       return alert("Preencha o código de segurança do cartão corretamente");
     }
 
+    if (requests.length < 1) {
+      return alert("Adicione algo no seu carrinho antes de concluir a compra");
+    }
+
     clockActive();
+
+    setLoading(true);
+
+    await api.post("/purchases")
+      .then(() => {
+        setTimeout(() => {
+          alert("Pedido realizado com sucesso!");
+          navigate("/");
+        }, 10000);
+      })
+      .catch(error => {
+        if (error.response) {
+          alert(error.response.data.message);
+        } else {
+          alert("Não foi possível realizar o pedido.");
+        }
+      })
+
+    setLoading(false)
   }
+
+  useEffect(() => {
+    async function fetchRequests() {
+      const response = await api.get("/requests");
+      setRequests(response.data);
+    }
+
+    fetchRequests();
+  }, [requests])
 
   return (
     <Container>
@@ -160,6 +195,7 @@ export function Payment() {
                         <Button
                           title="Finalizar pagamento"
                           onClick={handlePaymentProgress}
+                          loading={loading}
                         />
 
                       </div>

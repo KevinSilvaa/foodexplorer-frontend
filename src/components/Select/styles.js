@@ -20,6 +20,7 @@ export const Container = styled.div`
     background: ${({ theme }) => theme.COLORS.DARK.DARK_900};
     display: none;
     position: absolute;
+    z-index: 10;
     bottom: -275%;
     width: 100%;
 

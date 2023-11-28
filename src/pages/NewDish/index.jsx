@@ -87,6 +87,10 @@ export function NewDish() {
       return alert("Você deixou um ingrediente no campo para adicionar, clique para adicioná-lo ou deixe o campo vazio.");
     }
 
+    if (!imageFile) {
+      return alert("Você não pode adicionar um prato no cardápio sem uma imagem!")
+    }
+
     setLoading(true);
 
     const formData = new FormData();
@@ -98,7 +102,7 @@ export function NewDish() {
 
     ingredients.map(ingredient => (
       formData.append("ingredients", ingredient)
-    ));
+    ))
 
     await api.post("/dishes", formData)
       .then(() => {
@@ -115,7 +119,6 @@ export function NewDish() {
 
     setLoading(false);
   }
-
 
   return (
     <Container>

@@ -20,6 +20,9 @@ export function DishDetails() {
   const [data, setData] = useState(null);
 
   const [image, setImage] = useState(null);
+
+  const [quantity, setQuantity] = useState(1);
+
   const { user } = useAuth();
 
   const params = useParams();
@@ -27,24 +30,37 @@ export function DishDetails() {
 
   const isAdmin = user.role === "admin"
 
+  async function handleRequest() {
+    await api.post("/requests", {
+      dish_id: data.id,
+      quantity
+    })
+      .then(() => {
+        alert("Prato adicionado com sucesso ao carrinho de compras");
+      })
+      .catch(error => {
+        if (error.response) {
+          alert(error.response.data.message);
+        } else {
+          alert("Não foi possível adicionar o prato ao carrinho de compras");
+        }
+      })
+  }
+
   useEffect(() => {
     async function fetchDish() {
       const response = await api.get(`/dishes/${params.id}`);
       setData(response.data);
       setImage(response.data.image);
-    } 
-    
+    }
+
     fetchDish();
   }, []);
-  
+
   function handleDishEdit() {
     navigate(`/editdish/${params.id}`);
   }
-  
-  function handleAdd() {
-    alert("Adicionado");
-  }
-  
+
   const imageUrl = `${api.defaults.baseURL}/files/${image}`;
 
   return (
@@ -80,11 +96,11 @@ export function DishDetails() {
                 </div>
                 :
                 <div className="buttons">
-                  <Stepper />
+                  <Stepper quantity={quantity} setQuantity={setQuantity} />
                   <ButtonIcon
                     title={`Pedir - R$${data.price}`}
                     icon
-                    onClick={handleAdd}
+                    onClick={handleRequest}
                   />
                 </div>
               }

@@ -21,6 +21,7 @@ import logo from "../../assets/Logo.svg";
 export function Header({ search, setSearch }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dishes, setDishes] = useState([]);
+
   const [userRequests, setUserRequests] = useState();
   const [ordersPending, setOrdersPending] = useState();
 
@@ -69,7 +70,17 @@ export function Header({ search, setSearch }) {
     }
 
     handleUserRequests();
-  }, [userRequests])
+  }, [userRequests]);
+
+  useEffect(() => {
+    async function handleOrders() {
+      const response = await api.get("/purchases");
+
+      setOrdersPending(response.data);
+    }
+
+    handleOrders();
+  }, [ordersPending]);
 
   return (
     <Container>
@@ -166,7 +177,7 @@ export function Header({ search, setSearch }) {
               className="orders"
               order
               title="Pedidos" icon
-              quantity={ordersPending}
+              quantity={ordersPending ? ordersPending.filter(order => order.status !== "delivered").length : 0}
               onClick={handleOrder}
             />
 
