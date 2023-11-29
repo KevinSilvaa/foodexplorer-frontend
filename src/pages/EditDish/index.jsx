@@ -23,8 +23,6 @@ import { FiUpload } from "react-icons/fi";
 import { LuBeef, LuCakeSlice, LuCheck, LuCupSoda, LuSalad } from "react-icons/lu";
 
 export function EditDish() {
-  const [data, setData] = useState(null);
-
   const [loading, setLoading] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
 
@@ -93,9 +91,16 @@ export function EditDish() {
 
     setLoading(true);
 
-    api.put(`/dishes/${params.id}`, { name: name, category: category, price: price, description: description, ingredients: ingredients });
+    api.put(`/dishes/${params.id}`, {
+      name,
+      category,
+      price,
+      description,
+      ingredients
+    });
 
     const formData = new FormData();
+    console.log(imageFile);
     formData.append("image", imageFile);
 
     api.patch(`/dishes/image/${params.id}`, formData);
@@ -202,6 +207,19 @@ export function EditDish() {
                 <input
                   type="radio"
                   name="category"
+                  value="Sobremesas"
+                  data-label="Sobremesas"
+                />
+
+                <LuCakeSlice />
+                <span className="label">Sobremesas</span>
+                <LuCheck />
+              </li>
+
+              <li className="option" onClick={handleClick}>
+                <input
+                  type="radio"
+                  name="category"
                   value="Bebidas"
                   data-label="Bebidas"
                 />
@@ -211,18 +229,6 @@ export function EditDish() {
                 <LuCheck />
               </li>
 
-              <li className="option" onClick={handleClick}>
-                <input
-                  type="radio"
-                  name="category"
-                  value="Sobremesas"
-                  data-label="Sobremesas"
-                />
-
-                <LuCakeSlice />
-                <span className="label">Sobremesas</span>
-                <LuCheck />
-              </li>
             </Select>
 
             <div>

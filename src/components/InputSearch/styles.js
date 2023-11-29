@@ -8,8 +8,15 @@ export const Container = styled.div`
   height: 3rem;
   border-radius: 0.5rem;
 
-  svg {
-    color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_100};
+  button {
+    background: transparent;
+    width: 24px;
+    height: 24px;
+    border: none;
+
+    svg {
+      color: ${({ theme }) => theme.COLORS.LIGHT.LIGHT_100};
+    }
   }
 
   input {

@@ -53,6 +53,12 @@ export function Header({ search, setSearch }) {
     signOut();
   }
 
+  function handleKeyDown(e) {
+    if (e.keyCode === 13) {
+      handleOpen();
+    }
+  }
+
   // Function to change hamburger menu to open or close
   function handleOpen() {
     setMenuOpen(!menuOpen);
@@ -96,7 +102,9 @@ export function Header({ search, setSearch }) {
           <InputSearch
             placeholder="Busque por pratos ou ingredientes"
             icon
-            onChange={e => setSearch(e.target.value)}
+            onClick={handleOpen}
+            onChange={setSearch}
+            onKeyDown={handleKeyDown}
           />
 
           <div className="buttons">
@@ -150,7 +158,8 @@ export function Header({ search, setSearch }) {
         <InputSearch
           placeholder="Busque por pratos ou ingredientes"
           icon
-          onChange={e => setSearch(e.target.value)}
+          onChange={setSearch}
+          onKeyDown={handleKeyDown}
         />
 
         <div className="desktop buttons">

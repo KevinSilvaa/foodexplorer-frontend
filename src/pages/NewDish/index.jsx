@@ -99,10 +99,7 @@ export function NewDish() {
     formData.append("description", description);
     formData.append("category", category);
     formData.append("price", price);
-
-    ingredients.map(ingredient => (
-      formData.append("ingredients", ingredient)
-    ))
+    formData.append("ingredients", ingredients)
 
     await api.post("/dishes", formData)
       .then(() => {
@@ -184,6 +181,19 @@ export function NewDish() {
                 <input
                   type="radio"
                   name="category"
+                  value="Sobremesas"
+                  data-label="Sobremesas"
+                />
+
+                <LuCakeSlice />
+                <span className="label">Sobremesas</span>
+                <LuCheck />
+              </li>
+
+              <li className="option" onClick={handleClick}>
+                <input
+                  type="radio"
+                  name="category"
                   value="Bebidas"
                   data-label="Bebidas"
                 />
@@ -193,18 +203,6 @@ export function NewDish() {
                 <LuCheck />
               </li>
 
-              <li className="option" onClick={handleClick}>
-                <input
-                  type="radio"
-                  name="category"
-                  value="Sobremesas"
-                  data-label="Sobremesas"
-                />
-
-                <LuCakeSlice />
-                <span className="label">Sobremesas</span>
-                <LuCheck />
-              </li>
             </Select>
 
             <div>

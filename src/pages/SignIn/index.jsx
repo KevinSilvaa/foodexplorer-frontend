@@ -26,8 +26,8 @@ export function SignIn() {
     if (!email || !password) {
       return alert("Preencha todos os campos");
     }
-    
-    signIn({ email, password })
+
+    signIn({ email, password });
   }
 
   return (
@@ -54,9 +54,9 @@ export function SignIn() {
           icon={FiLock}
           onChange={e => setPassword(e.target.value)}
         />
-        <Button 
+        <Button
           title="Entrar"
-          onClick={handleSignIn}  
+          onClick={handleSignIn}
         />
 
         <Link to="/register">Criar uma conta</Link>

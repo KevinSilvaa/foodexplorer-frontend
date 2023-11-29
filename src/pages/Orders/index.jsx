@@ -130,7 +130,7 @@ export function Orders() {
             {purchases &&
               <>
                 {purchases.length < 1 &&
-                  <tbody>
+                  <tbody className="no-orders-table">
                     <tr className="no-orders">
                       <td className="no-orders-text">Não existem pedidos registrados ainda!</td>
                     </tr>

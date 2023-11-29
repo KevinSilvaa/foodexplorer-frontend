@@ -174,6 +174,8 @@ export const Content = styled.main`
     .no-orders {
       margin-top: 12.5rem;
       font-size: 2.5rem;
+      border-top: 2px solid ${({ theme }) => theme.COLORS.DARK.DARK_1000};
+      border-radius: 0.5rem;
 
       .no-orders-text {
         border: none;
@@ -234,17 +236,16 @@ export const Content = styled.main`
         
         tr {
           border: 2px solid ${({ theme }) => theme.COLORS.DARK.DARK_1000};
+          border-top: none;
           display: grid;
-          grid-template-columns: 1.74fr 1fr 3fr 1fr;
+          grid-template-columns: 1.75fr 1fr 3fr 1fr;
           grid-template-areas: "status code details date";
           gap: 0;  
-          border: none;
           padding: 0;
           border-radius: 0;
 
           td {
-            border: 1px solid ${({ theme }) => theme.COLORS.DARK.DARK_1000};
-            border-top: none;
+            border-right: 2px solid ${({ theme }) => theme.COLORS.DARK.DARK_1000};
             display: flex;
             align-items: center;
  
@@ -281,7 +282,7 @@ export const Content = styled.main`
     }
 
     #user-table {
-      
+
       tr {
         border: 2px solid ${({ theme }) => theme.COLORS.DARK.DARK_1000};
         border-top: 0;
@@ -321,17 +322,11 @@ export const Content = styled.main`
 
   @media screen and (min-width: 1024px) {
     .table-head tr {
-      grid-template-columns: 1.73fr 1fr 3fr 0.98fr;
+      grid-template-columns: 1.75fr 1fr 3fr 1fr;
     }
     
     tbody tr td {
       padding: 1rem 1.5rem;
-    }
-  }
-
-  @media screen and (min-width: 1440px) {
-    .table-head tr {
-      grid-template-columns: 1.685fr 0.97fr 2.91fr 0.96fr;
     }
   }
 `;

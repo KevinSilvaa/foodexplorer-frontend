@@ -24,11 +24,19 @@ export function SignUp() {
 
   const navigate = useNavigate();
 
-  const { singUp } = useAuth()
-
   async function handleSignUp() {
     if (!name || !email || !password) {
       return alert("Preencha todos os campos");
+    }
+
+    if (password.length < 6) {
+      return alert("A senha deve conter mais que 6 caracteres")
+    }
+
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (!emailRegex.test(email)) {
+      return alert("Insira um email válido");
     }
 
     try {
@@ -64,7 +72,7 @@ export function SignUp() {
 
         <Input
           placeholder="Exemplo: @exemplo@gmail.com"
-          type="text"
+          type="email"
           title="Email"
           icon={FiUser}
           onChange={e => setEmail(e.target.value)}
