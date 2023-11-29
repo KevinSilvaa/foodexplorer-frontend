@@ -15,7 +15,7 @@ export function ItemsCarts() {
 
   async function handleRemoveItem(id) {
     await api.delete(`/requests/${id}`)
-    .then(alert("Prato excluído do carrinho de compras com sucesso!"))
+    .then(() => alert("Prato excluído do carrinho de compras com sucesso!"))
     .catch(error => {
       if (error.response) {
         alert(error.response.data.message);

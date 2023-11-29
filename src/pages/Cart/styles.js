@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
   .disabled {
     display: none;
@@ -11,7 +11,6 @@ export const Container = styled.div`
 
 export const Content = styled.main`
   padding: 3.5rem 2.25rem 2rem;
-  height: 100vh;
 
   #item-carts {
     display: flex;

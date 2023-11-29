@@ -6,7 +6,7 @@ import { InputSearch } from "../InputSearch";
 import { ButtonIcon } from "../ButtonIcon";
 
 // Strategic Imports
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
@@ -18,9 +18,8 @@ import { FiLogOut, FiMenu } from "react-icons/fi";
 // Image Imports
 import logo from "../../assets/Logo.svg";
 
-export function Header({ search, setSearch }) {
+export function Header({ setSearch }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dishes, setDishes] = useState([]);
 
   const [userRequests, setUserRequests] = useState();
   const [ordersPending, setOrdersPending] = useState();
@@ -100,7 +99,7 @@ export function Header({ search, setSearch }) {
       <nav className="hamb hide">
         <div>
           <InputSearch
-            placeholder="Busque por pratos ou ingredientes"
+            placeholder="Busque por pratos"
             icon
             onClick={handleOpen}
             onChange={setSearch}
@@ -156,7 +155,7 @@ export function Header({ search, setSearch }) {
         </Logo>
 
         <InputSearch
-          placeholder="Busque por pratos ou ingredientes"
+          placeholder="Busque por pratos"
           icon
           onChange={setSearch}
           onKeyDown={handleKeyDown}
@@ -196,7 +195,7 @@ export function Header({ search, setSearch }) {
               className="orders"
               order
               title="Pedidos" icon
-              quantity={userRequests ? userRequests.length : 0}
+              quantity={userRequests ? userRequests.filter(order => order.status !== "delivered").length : 0}
               onClick={handleCart}
             />
 

@@ -19,19 +19,12 @@ import background from "../../assets/bannerbg.svg";
 export function Home() {
   const [dishes, setDishes] = useState([]);
   const [search, setSearch] = useState("");
-  const [ingredient, setIngredient] = useState("");
-
-  function handleSearch(e) {
-    setSearch(e.target.value);
-    setIngredient(e.target.value);
-  }
 
   useEffect(() => {
     async function fetchDishes() {
 
       const response = await api.get(`/dishes?name=${search}`);
       setDishes(response.data);
-
     }
 
     fetchDishes()
@@ -39,7 +32,7 @@ export function Home() {
 
   return (
     <Container>
-      <Header setSearch={handleSearch} />
+      <Header setSearch={e => setSearch(e.target.value)} />
 
       <Content id="content">
         <Banner>

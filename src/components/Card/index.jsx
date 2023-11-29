@@ -16,7 +16,6 @@ import { PiPencil, PiHeart, PiHeartFill } from "react-icons/pi";
 
 export function Card({ data, ...rest }) {
   const [favorite, setFavorite] = useState(false);
-  const [favorites, setFavorites] = useState([]);
   const [favoritesList, setFavoritesList] = useState(JSON.parse(localStorage.getItem("@foodexplorer:favorites")));
   const [quantity, setQuantity] = useState(1);
 
@@ -118,7 +117,7 @@ export function Card({ data, ...rest }) {
     }
 
     fetchFavorites();
-  }, [data.id])
+  }, [])
 
   useEffect(() => {
     async function saveFavorites() {
@@ -135,7 +134,7 @@ export function Card({ data, ...rest }) {
     }
 
     saveFavorites();
-  }, [favorites])
+  }, [])
 
   return (
     <Container {...rest}>

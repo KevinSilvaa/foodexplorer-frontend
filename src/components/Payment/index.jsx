@@ -34,8 +34,6 @@ export function Payment() {
 
   const [loading, setLoading] = useState(false);
 
-  const [requests, setRequests] = useState();
-
   const navigate = useNavigate();
 
   function handlePix() {
@@ -96,10 +94,6 @@ export function Payment() {
       return alert("Preencha o código de segurança do cartão corretamente");
     }
 
-    if (requests.length < 1) {
-      return alert("Adicione algo no seu carrinho antes de concluir a compra");
-    }
-
     clockActive();
 
     setLoading(true);
@@ -121,15 +115,6 @@ export function Payment() {
 
     setLoading(false)
   }
-
-  useEffect(() => {
-    async function fetchRequests() {
-      const response = await api.get("/requests");
-      setRequests(response.data);
-    }
-
-    fetchRequests();
-  }, [requests])
 
   return (
     <Container>
