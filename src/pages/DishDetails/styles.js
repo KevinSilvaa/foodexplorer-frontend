@@ -3,11 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-
-  footer {
-    position: absolute;
-    bottom: 0;
-  }
 `;
 
 export const Content = styled.div`
@@ -73,6 +68,11 @@ export const Content = styled.div`
   @media screen and (min-width: 1024px) {
     padding: 0.5rem 7.5rem 9rem;
     gap: 2.5rem;
+
+    footer {
+      position: absolute;
+      bottom: 0;
+    }
 
     > div {
       flex-direction: row;
