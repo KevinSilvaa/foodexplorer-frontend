@@ -69,7 +69,7 @@ export function Header({ setSearch }) {
 
   useEffect(() => {
     async function handleUserRequests() {
-      const response = await api.get("/requests");
+      const response = await api.get("/requests", { withCredentials: true });
 
       setUserRequests([...response.data]);
     }
@@ -79,7 +79,7 @@ export function Header({ setSearch }) {
 
   useEffect(() => {
     async function handleOrders() {
-      const response = await api.get("/purchases");
+      const response = await api.get("/purchases", { withCredentials: true });
 
       setOrdersPending(response.data);
     }
