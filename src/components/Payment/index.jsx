@@ -32,6 +32,8 @@ export function Payment() {
   const [validity, setValidity] = useState("");
   const [securityCode, setSecurityCode] = useState("");
 
+  const [cart, setCart] = useState([]);
+
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -94,6 +96,10 @@ export function Payment() {
       return alert("Preencha o código de segurança do cartão corretamente");
     }
 
+    if (cart.length < 1) {
+      return alert("Você não pode realizar o pagamento sem nenhum produto no carrinho!");
+    }
+
     clockActive();
 
     setLoading(true);
@@ -115,6 +121,15 @@ export function Payment() {
 
     setLoading(false)
   }
+
+  useEffect(() => {
+    async function handleCart() {
+      const response = await api.get("/requests");
+      setCart(response.data);
+    }
+
+    handleCart()
+  }, [cart])
 
   return (
     <Container>

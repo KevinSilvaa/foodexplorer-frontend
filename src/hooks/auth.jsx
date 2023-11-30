@@ -5,13 +5,12 @@ import { api } from "../services/api";
 
 const AuthContext = createContext({});
 
-function AuthProvider({ children }) {
-
+function AuthProvider({ children }) { 
   const [data, setData] = useState({});
 
   // Function to control user login
   async function signIn({ email, password }) {
-
+    
     try {
       const response = await api.post("/sessions", { email, password }, { withCredentials: true });
       const { user, favorites } = response.data;
@@ -43,7 +42,6 @@ function AuthProvider({ children }) {
     const favorites = localStorage.getItem("@foodexplorer:favorites");
 
     if (user) {
-
       setData({
         user: JSON.parse(user),
         favorites

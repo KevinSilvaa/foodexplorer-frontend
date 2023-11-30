@@ -23,7 +23,7 @@ export function Home() {
   useEffect(() => {
     async function fetchDishes() {
 
-      const response = await api.get(`/dishes?name=${search}`, { withCredentials: true });
+      const response = await api.get(`/dishes?name=${search}`);
       setDishes(response.data);
     }
 

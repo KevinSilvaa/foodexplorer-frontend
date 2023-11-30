@@ -91,7 +91,7 @@ export function EditDish() {
 
     setLoading(true);
 
-    api.put(`/dishes/${params.id}`, {
+    await api.put(`/dishes/${params.id}`, {
       name,
       category,
       price,
@@ -100,7 +100,6 @@ export function EditDish() {
     });
 
     const formData = new FormData();
-    console.log(imageFile);
     formData.append("image", imageFile);
 
     api.patch(`/dishes/image/${params.id}`, formData);
