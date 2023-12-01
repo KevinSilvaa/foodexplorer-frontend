@@ -1,11 +1,8 @@
 // Styling Imports
 import { Container } from "./styles";
 
-// Components Imports
-import { Card } from "../Card";
-
 // Carousel Imports
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Splide } from "@splidejs/react-splide";
 
 // Carousel Styling Imports
 import '@splidejs/splide/css/skyblue';

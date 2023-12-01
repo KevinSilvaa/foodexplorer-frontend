@@ -7,9 +7,6 @@ import { Header } from "../../components/Header";
 import { ItemsCarts } from "../../components/ItemsCarts";
 import { Footer } from "../../components/Footer";
 
-// Strategic Imports
-
-
 export function Cart() {
 
   function handlePayment() {

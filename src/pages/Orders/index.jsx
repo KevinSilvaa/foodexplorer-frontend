@@ -20,7 +20,6 @@ export function Orders() {
   const [purchases, setPurchases] = useState([]);
 
   const [status, setStatus] = useState();
-  const [disabled, setDisabled] = useState(false);
 
   const { user } = useAuth();
 

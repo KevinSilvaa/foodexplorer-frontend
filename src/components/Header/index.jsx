@@ -6,7 +6,7 @@ import { InputSearch } from "../InputSearch";
 import { ButtonIcon } from "../ButtonIcon";
 
 // Strategic Imports
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
