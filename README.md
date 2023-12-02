@@ -93,3 +93,8 @@ http://localhost:5173
 ## 🔖 Layout
 
 Caso queira visualizar o layout do projeto, [clique aqui](https://www.figma.com/file/uPtB43YFVq8AsAsGz7tjqI/food-explorer-v2-(Community)?node-id=201%3A1532&mode=dev).
+
+## Feito por:
+
+### Kevin
+### Linkedin: www.linkedin.com/in/kevinsilvaa
