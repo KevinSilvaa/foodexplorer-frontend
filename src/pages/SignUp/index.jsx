@@ -21,6 +21,8 @@ export function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   async function handleSignUp() {
@@ -38,6 +40,8 @@ export function SignUp() {
       return alert("Insira um email válido");
     }
 
+    setLoading(true);
+
     try {
       await api.post("/users", { name, email, password });
       alert("Cadastro realizado com sucesso");
@@ -49,6 +53,8 @@ export function SignUp() {
         alert("Não foi possível cadastrar.");
       }
     }
+
+    setLoading(false);
   }
 
   return (
@@ -88,6 +94,7 @@ export function SignUp() {
         <Button
           title="Criar conta"
           onClick={handleSignUp}
+          loading={loading}
         />
 
         <Link to="/">Já tenho uma conta</Link>

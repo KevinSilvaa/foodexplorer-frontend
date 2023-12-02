@@ -20,6 +20,8 @@ export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const { signIn } = useAuth();
 
   function handleSignIn() {
@@ -27,7 +29,11 @@ export function SignIn() {
       return alert("Preencha todos os campos");
     }
 
+    setLoading(true);
+
     signIn({ email, password });
+
+    setLoading(false);
   }
 
   return (
@@ -57,6 +63,7 @@ export function SignIn() {
         <Button
           title="Entrar"
           onClick={handleSignIn}
+          loading={loading}
         />
 
         <Link to="/register">Criar uma conta</Link>
