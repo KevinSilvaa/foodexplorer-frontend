@@ -22,7 +22,7 @@ Ambos perfis também contam com um sistema de pesquisa dos pratos e uma página 
 
 # Tecnologias utilizadas para construção do Front-end
 
-- `ReactJS`: Uma framework do JavaScript utilizada para estruturação das páginas
+- `ReactJS`: Uma biblioteca do JavaScript utilizada para estruturação das páginas
     
   - `Vite`; Utilizado para criar a base da aplicação em ReactJS.
   - `React Router Dom`; Utilizado para interagir com a DOM, principalmente com a navegação entre páginas.
